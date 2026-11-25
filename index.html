@@ -568,6 +568,19 @@ body{-webkit-tap-highlight-color:rgba(212,175,90,.18)}
 }
 @media(max-width:480px){.nav{justify-content:space-between}.nav a{font-size:.74rem;letter-spacing:.05em;padding-inline:.38em}}
 @media(max-width:360px){.nav a{font-size:.68rem;letter-spacing:.02em;padding-inline:.25em}.cov-head .mk-word{width:210px}.code b,.cov .code b{font-size:1.9rem}.stats.s4 .stat b{font-size:1.5rem}}
+
+.stabs{display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--bg);border:1px solid var(--line)}
+.stabs button{flex:1;font-family:var(--f-title);text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;padding:.75em 1em;min-height:44px;border-radius:999px;border:0;background:none;color:var(--soft);cursor:pointer}
+.stabs button[aria-selected="true"]{background:var(--gold-grad);background-size:220% 100%;color:#24190A;font-weight:600}
+.f select,.f textarea{font:inherit;font-size:16px;padding:.8em 1em;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--text);width:100%}
+.f textarea{resize:vertical;min-height:84px}
+.mprices{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.mchecks{display:flex;flex-wrap:wrap;gap:6px 18px}
+.mlist{max-height:420px}
+.mlist small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:46ch}
+.mprice{font-family:var(--f-title);letter-spacing:.04em;color:var(--heading);white-space:nowrap}
+.clist .prz.off{background:var(--line);color:var(--soft)}
+.mdel{color:#E59A92;border-color:rgba(229,154,146,.45)}
 </style>
 
 <header class="top" id="top">
@@ -985,7 +998,7 @@ document.getElementById('waTorta').href=wa('¡Hola Magnolias! Quiero encargar un
 
 /* ---------- DATOS DE LA CARTA (Carta Magnolias 2026) ---------- */
 const V='vegan', G='veg', N='new';
-const CARTA=[
+let CARTA=[
  {id:'sartenes',name:'Sartenes de huevo',note:'con hogaza de masa madre',img:'sarten.jpg',vid:'v-sarten',items:[
   ['Sartén de huevo + tocino','Huevos revueltos acompañados de tocino y hogaza de masa madre.',5500,[]],
   ['Sartén de huevo + cebolla crispy','Huevos revueltos acompañados de cebolla crispy y hogaza de masa madre.',5500,[G]],
@@ -1057,11 +1070,11 @@ const CARTA=[
   ['Extra: leche vegetal','',800,[V]]]}
 ];
 /* Carta de pastelería familiar */
-const PAS_T=[
+let PAS_T=[
  ['Pie de limón','Masa sablée, crema cítrica con limón natural y merengue suizo.','Diámetro 28 cm',23000,[G]],
  ['Cheesecake de frambuesa','Base de galletas y mantequilla, relleno de queso crema y mermelada de frambuesa.','Diámetro 27 cm',25000,[G]],
  ['Kuchen sureño','Masa quebrada con suave relleno de crema y berries.','Diámetro 28 cm',25000,[G]]];
-const PAS_V=[
+let PAS_V=[
  ['Carrot cake','Bizcocho de zanahoria y naranja, crema de castañas de cajú, nueces y semillas de zapallo.','Diámetro 20 cm',28000,[V]],
  ['Brownie de plátano','Plátano y cacao con harina de avena, cubierto de nueces.','22 × 8 cm',10000,[V]],
  ['Queque de zanahoria','Bizcocho de zanahoria y naranja con nueces, semillas de zapallo y glaseado.','22 × 8 cm',12000,[V]],
@@ -1072,28 +1085,31 @@ const leaf='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-wi
 const tags=t=>(t.includes(V)?'<span class="tag tag-vegan">'+leaf+'Vegano</span>':t.includes(G)?'<span class="tag tag-veg">Vegetariano</span>':'')+(t.includes(N)?'<span class="tag tag-new">Nuevo</span>':'');
 const isVeg=t=>t.includes(V)||t.includes(G);
 
-/* contadores (sin bebidas/extras) */
-const food=CARTA.filter(c=>c.id!=='bebidas');
-const nV=food.reduce((a,c)=>a+c.items.filter(i=>i[3].includes(V)&&c.id!=='cafe'&&c.id!=='frio'&&c.id!=='te').length,0)+PAS_V.length+3; /* + mocktails veganos */
-document.getElementById('nVegan').textContent=nV;
-const nG=['sartenes','desayunos','smoothies','sandwiches','ensalada'].reduce((a,id)=>a+CARTA.find(c=>c.id===id).items.filter(i=>isVeg(i[3])).length,0)+PAS_T.length+PAS_V.length;
-document.getElementById('nVeg').textContent=nG;
-
-/* render pastelería */
-const pasHTML=list=>list.map(p=>'<li class="item"><div class="item-name">'+p[0]+' <span class="size">'+p[2]+'</span></div><div class="price">'+clp(p[3])+'</div><p class="item-desc">'+p[1]+'</p></li>').join('');
-document.getElementById('pasTrad').innerHTML=pasHTML(PAS_T);
-document.getElementById('pasVeg').innerHTML=pasHTML(PAS_V);
+/* contadores, pastelería y carta (se vuelven a dibujar si la carta llega desde Supabase) */
+const pasHTML=list=>list.map(p=>'<li class="item"><div class="item-name">'+esc0(p[0])+' '+(p[2]?'<span class="size">'+esc0(p[2])+'</span>':'')+'</div><div class="price">'+clp(p[3])+'</div>'+(p[1]?'<p class="item-desc">'+esc0(p[1])+'</p>':'')+'</li>').join('');
+function esc0(t){return String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function counts(){
+  const food=CARTA.filter(c=>c.id!=='bebidas');
+  const nV=food.reduce((a,c)=>a+c.items.filter(i=>i[3].includes(V)&&c.id!=='cafe'&&c.id!=='frio'&&c.id!=='te').length,0)+PAS_V.filter(p=>(p[4]||[]).includes(V)).length+3; /* + mocktails veganos */
+  document.getElementById('nVegan').textContent=nV;
+  const nG=['sartenes','desayunos','smoothies','sandwiches','ensalada'].reduce((a,id)=>{const c=CARTA.find(c=>c.id===id);return a+(c?c.items.filter(i=>isVeg(i[3])).length:0);},0)+PAS_T.length+PAS_V.length;
+  document.getElementById('nVeg').textContent=nG;
+  document.getElementById('pasTrad').innerHTML=pasHTML(PAS_T);
+  document.getElementById('pasVeg').innerHTML=pasHTML(PAS_V);
+}
+counts();
 
 /* render carta */
 let cur='sartenes', fVegan=false, fVeg=false;
 const catsEl=document.getElementById('cats'), content=document.getElementById('catContent'), img=document.getElementById('catImg');
-catsEl.innerHTML=CARTA.map(c=>'<button class="cat" role="tab" data-id="'+c.id+'" aria-selected="'+(c.id===cur)+'">'+c.name+'</button>').join('');
+function drawCats(){catsEl.innerHTML=CARTA.map(c=>'<button class="cat" role="tab" data-id="'+c.id+'" aria-selected="'+(c.id===cur)+'">'+esc0(c.name)+'</button>').join('');}
+drawCats();
 const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function render(animate){
   const c=CARTA.find(x=>x.id===cur);
   let items=c.items.filter(i=>fVegan?i[3].includes(V):fVeg?isVeg(i[3]):true);
   const head='<div class="cat-title"><h3>'+c.name+'</h3>'+(c.cols?'<div class="cols"><span>'+c.cols[0]+'</span><span>'+c.cols[1]+'</span></div>':'<p>'+c.note+'</p>')+'</div>';
-  const body=items.length?'<ul class="items">'+items.map(i=>'<li class="item"><div class="item-name">'+i[0]+' '+tags(i[3])+'</div><div class="price">'+(Array.isArray(i[2])?i[2].map(clp).map(s=>'<span>'+s+'</span>').join(''):clp(i[2]))+'</div>'+(i[1]?'<p class="item-desc">'+i[1]+'</p>':'')+'</li>').join('')+'</ul>':'<p class="empty">No hay opciones '+(fVegan?'veganas':'sin carne')+' en esta categoría. Prueba con Smoothies, Sándwiches o Fríos y mocktails.</p>';
+  const body=items.length?'<ul class="items">'+items.map(i=>'<li class="item"><div class="item-name">'+esc0(i[0])+' '+tags(i[3])+'</div><div class="price">'+(Array.isArray(i[2])?i[2].map(clp).map(s=>'<span>'+s+'</span>').join(''):clp(i[2]))+'</div>'+(i[1]?'<p class="item-desc">'+esc0(i[1])+'</p>':'')+'</li>').join('')+'</ul>':'<p class="empty">No hay opciones '+(fVegan?'veganas':'sin carne')+' en esta categoría. Prueba con Smoothies, Sándwiches o Fríos y mocktails.</p>';
   content.innerHTML=head+body;
   const cv=document.getElementById('catVid');
   if(c.vid){img.hidden=true;cv.hidden=false;cv.play&&cv.play().catch(()=>{});}
@@ -1106,6 +1122,27 @@ const fv=document.getElementById('f-vegan'), fg=document.getElementById('f-veg')
 fv.onclick=()=>{fVegan=!fVegan;if(fVegan)fVeg=false;fv.setAttribute('aria-pressed',fVegan);fg.setAttribute('aria-pressed',fVeg);render(true);};
 fg.onclick=()=>{fVeg=!fVeg;if(fVeg)fVegan=false;fv.setAttribute('aria-pressed',fVegan);fg.setAttribute('aria-pressed',fVeg);render(true);};
 render(false);
+
+/* carta desde Supabase: si cambia en el panel del barista, la web la muestra al tiro */
+window.MAG_menu={
+  apply(menu){
+    if(!Array.isArray(menu)||!menu.length)return;
+    const live=menu.filter(c=>c.carta==='carta').map(c=>({id:c.id,name:c.name,note:c.note||'',cols:c.cols||null,img:c.img||'sarten.jpg',vid:c.vid||null,
+      items:c.items.filter(i=>i.available!==false).map(i=>[i.name,i.description||'',i.price2!=null?[i.price,i.price2]:i.price,i.tags||[]])}));
+    const pas=id=>{const c=menu.find(x=>x.id===id);return c?c.items.filter(i=>i.available!==false).map(i=>[i.name,i.description||'',i.size||'',i.price,i.tags||[]]):[];};
+    CARTA=live;PAS_T=pas('pas-trad');PAS_V=pas('pas-veg');
+    if(!CARTA.find(c=>c.id===cur))cur=CARTA[0]?CARTA[0].id:cur;
+    counts();drawCats();if(CARTA.length)render(false);
+  },
+  toMenu(){
+    let n=1;const it=i=>({id:n++,name:i[0],description:i[1]||null,size:null,price:Array.isArray(i[2])?i[2][0]:i[2],price2:Array.isArray(i[2])?i[2][1]:null,tags:i[3]||[],available:true});
+    const p=(id,name,L)=>({id,carta:'pasteleria',name,note:null,cols:null,img:null,vid:null,items:L.map(x=>({id:n++,name:x[0],description:x[1],size:x[2],price:x[3],price2:null,tags:x[4]||[],available:true}))});
+    return CARTA.map(c=>({id:c.id,carta:'carta',name:c.name,note:c.note,cols:c.cols||null,img:c.img,vid:c.vid||null,items:c.items.map(it)})).concat([p('pas-trad','Tradicionales',PAS_T),p('pas-veg','Veganas',PAS_V)]);
+  }
+};
+(async()=>{try{const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),4000);
+  const r=await fetch('https://qspqdtxqybozrkgddezt.supabase.co/rest/v1/rpc/menu_get',{method:'POST',signal:ctl.signal,headers:{apikey:'sb_publishable_wf3VZ1-oEQcCl_V-PkBYlA_ufXD0CMA','Content-Type':'application/json'},body:'{}'});
+  clearTimeout(t);if(r.ok)window.MAG_menu.apply(await r.json());}catch(e){}})();
 
 /* tabs de cartas */
 const tabC=document.getElementById('tab-carta'), tabP=document.getElementById('tab-pas'), pC=document.getElementById('panel-carta'), pP=document.getElementById('panel-pas');
@@ -1203,6 +1240,7 @@ const ERR={consent_required:'Marca la casilla para crear tu tarjeta.',invalid_na
   too_many_attempts:'Demasiados intentos. Vuelve a probar en una hora o pide tu código en caja.',not_staff:'Esta cuenta no tiene acceso al panel.',
   card_full_or_missing:'La tarjeta ya tiene 9 sellos: canjea el café gratis.',not_enough_stamps:'Aún no junta 9 sellos.',nothing_to_undo:'No hay sellos para deshacer.',
   no_scratch:'No te quedan raspes. Cada compra te da uno nuevo.',no_prize:'Este cliente no tiene premios del raspe por canjear.',
+  invalid_item_name:'Escribe el nombre del producto.',invalid_price:'Escribe un precio válido.',invalid_category:'Elige una categoría.',item_not_found:'Ese producto ya no existe. Recarga el panel.',
   bad_login:'Correo o contraseña incorrectos.',network:'No pudimos conectar. Revisa tu internet e intenta de nuevo.'};
 const msgOf=e=>ERR[e&&e.message]||ERR.network;
 const fail=m=>{throw new Error(m);};
@@ -1243,7 +1281,10 @@ function liveApi(){
     addStamp:id=>rpc('staff_add_stamp',{p_client:id},true),
     redeem:id=>rpc('staff_redeem',{p_client:id},true),
     redeemPrize:id=>rpc('staff_redeem_prize',{p_client:id},true),
-    undo:id=>rpc('staff_undo',{p_client:id},true)};
+    undo:id=>rpc('staff_undo',{p_client:id},true),
+    menuAll:()=>rpc('staff_menu_get',{},true),
+    menuSave:o=>rpc('staff_menu_save',{p_id:o.id||null,p_category:o.category,p_name:o.name,p_description:o.description,p_size:o.size,p_price:o.price,p_price2:o.price2,p_tags:o.tags,p_available:o.available},true),
+    menuDelete:id=>rpc('staff_menu_delete',{p_id:id},true)};
 }
 
 /* ---- Demostración: mismos pasos, datos solo en este navegador ---- */
@@ -1254,6 +1295,7 @@ function demoApi(){
     events:[{t:t-36e5,phone:'922222222',type:'sello'},{t:t-72e5,phone:'911111111',type:'sello'}],
     scratches:[{phone:'911111111',won:true,scratched:false,redeemed:false},{phone:'922222222',won:false,scratched:false,redeemed:false}],staff:false};}
   let S=lsGet(DEMO_KEY);if(!S||!S.clients)S=seed();if(!S.scratches)S.scratches=[];
+  let DM=null;
   const save=()=>lsSet(DEMO_KEY,S);
   const prizes=p=>S.scratches.filter(x=>x.phone===p&&x.won&&x.scratched&&!x.redeemed).length;
   const card=p=>{const c=S.clients[p];return{name:c.name,phone:c.phone,code:c.code,stamps:c.stamps,rewards:c.rewards,
@@ -1281,7 +1323,14 @@ function demoApi(){
     redeem(id){const c=S.clients[id];if(c.stamps<GOAL)return no('not_enough_stamps');c.stamps=0;c.rewards++;S.events.push({t:Date.now(),phone:id,type:'canje'});save();return ok(card(id));},
     redeemPrize(id){const x=S.scratches.find(s=>s.phone===id&&s.won&&s.scratched&&!s.redeemed);if(!x)return no('no_prize');x.redeemed=true;S.events.push({t:Date.now(),phone:id,type:'canje_premio'});save();return ok(card(id));},
     undo(id){const c=S.clients[id];const i=S.events.map(e=>e.phone===id&&e.type==='sello').lastIndexOf(true);if(i<0||!c.stamps)return no('nothing_to_undo');
-      S.events.splice(i,1);c.stamps--;const k=S.scratches.map(s=>s.phone===id&&!s.scratched).lastIndexOf(true);if(k>=0)S.scratches.splice(k,1);save();return ok(card(id));}};
+      S.events.splice(i,1);c.stamps--;const k=S.scratches.map(s=>s.phone===id&&!s.scratched).lastIndexOf(true);if(k>=0)S.scratches.splice(k,1);save();return ok(card(id));},
+    menuAll(){if(!DM)DM=window.MAG_menu.toMenu();return ok(JSON.parse(JSON.stringify(DM)));},
+    menuSave(o){if(!DM)DM=window.MAG_menu.toMenu();if(!o.name||o.name.trim().length<2)return no('invalid_item_name');
+      const cat=DM.find(c=>c.id===o.category);if(!cat)return no('invalid_category');
+      DM.forEach(c=>{c.items=c.items.filter(i=>i.id!==o.id||c.id===o.category);});
+      const it={id:o.id||Date.now(),name:o.name.trim(),description:o.description||null,size:o.size||null,price:o.price,price2:o.price2,tags:o.tags,available:o.available};
+      const k=cat.items.findIndex(i=>i.id===it.id);if(k>=0)cat.items[k]=it;else cat.items.push(it);return this.menuAll();},
+    menuDelete(id){DM.forEach(c=>{c.items=c.items.filter(i=>i.id!==id);});return this.menuAll();}};
 }
 
 /* ---- ¿Hay conexión con Supabase? (en el artifact la bloquea el navegador) ---- */
@@ -1336,6 +1385,7 @@ function makeScratch(box,onDone){
 const cli=document.getElementById('cliView'), staff=document.getElementById('staffView');
 const grid=document.getElementById('clubGrid'), paneCli=document.getElementById('paneCli'), paneStaff=document.getElementById('paneStaff'), note=document.getElementById('clubNote');
 const cliHome=cli.parentNode;
+let staffTab='caja', menuAll=null, mCat='sartenes', mEdit=null, mToast='';
 let api, me=null, cliMode='join', staffOn=false, stats=null, list=[], sel=null, q='', toast='', lastPop=null, busy=false, qTimer=null, scratching=false;
 
 function stampsHTML(n){return Array.from({length:10},(_,i)=>{const gift=i===9;const on=!gift&&i<n;const ready=gift&&n>=GOAL;return '<span class="stamp'+(gift?' gift':'')+(on?' on':'')+(ready?' ready':'')+'" data-i="'+i+'"><span class="mk mk-flor"></span></span>';}).join('');}
@@ -1439,8 +1489,9 @@ function renderStaff(){
       catch(x){document.getElementById('pErr').textContent=msgOf(x);}finally{setBusy(b,false);}};
     return;
   }
+  if(staffTab==='carta'){renderMenuEditor();return;}
   const c=sel&&list.find(x=>x.id===sel);
-  staff.innerHTML='<div class="detail-head"><p class="ptitle">Panel de caja</p><button class="linkbtn" id="sOut">Salir</button></div>'+
+  staff.innerHTML='<div class="detail-head"><p class="ptitle">Panel de caja</p><button class="linkbtn" id="sOut">Salir</button></div>'+stabsHTML()+
   '<div class="stats s4"><div class="stat"><b>'+(stats?stats.clients:'–')+'</b><span>clientes inscritos</span></div><div class="stat"><b>'+(stats?stats.stamps_today:'–')+'</b><span>sellos hoy</span></div><div class="stat"><b>'+(stats?stats.prizes_today:'–')+'</b><span>premios del raspe hoy</span></div><div class="stat"><b>'+(stats?stats.rewards:'–')+'</b><span>cafés regalados</span></div></div>'+
   '<div class="staff-tools"><div class="f"><label>Buscar por celular, código o nombre<input id="sq" value="'+esc(q)+'" placeholder="Ej: 9 1111 1111 o MAG-2741"></label></div><button class="btn btn-gold" id="sScan" type="button">Escanear QR</button></div>'+
   '<ul class="clist">'+(list.length?list.map(x=>'<li><button data-id="'+esc(x.id)+'" aria-pressed="'+(x.id===sel)+'"><span><b>'+esc(x.name)+'</b>'+(x.prizes?'<span class="prz">'+(x.prizes==1?'1 premio':x.prizes+' premios')+'</span>':'')+'<small>'+esc(x.code)+' · '+fmtPhone(x.phone)+'</small></span><span class="mini">'+Array.from({length:GOAL},(_,i)=>'<i class="'+(i<x.stamps?'on':'')+'"></i>').join('')+'</span></button></li>').join(''):'<li class="psub">Sin resultados. Pídele al cliente que se inscriba desde la web.</li>')+'</ul>'+
@@ -1452,6 +1503,7 @@ function renderStaff(){
   toast='';
   document.getElementById('sOut').onclick=async()=>{await api.logout();staffOn=false;sel=null;list=[];stats=null;renderStaff();};
   document.getElementById('sScan').onclick=openScanner;
+  bindStabs();
   const sq=document.getElementById('sq');
   sq.oninput=()=>{q=sq.value;clearTimeout(qTimer);qTimer=setTimeout(async()=>{try{list=await api.search(q)||[];}catch(e){toast=msgOf(e);}const pos=sq.selectionStart;renderStaff();const n=document.getElementById('sq');n.focus();n.setSelectionRange(pos,pos);},api.live?280:0);};
   staff.querySelectorAll('.clist button').forEach(b=>b.onclick=()=>{sel=b.dataset.id;renderStaff();});
@@ -1465,6 +1517,64 @@ function renderStaff(){
     act('aRedeem',api.redeem,()=>'Café de regalo canjeado. La tarjeta vuelve a cero.');
     act('aPrize',api.redeemPrize,()=>'Premio del raspe canjeado.');
     act('aUndo',api.undo,()=>'Último sello eliminado.');
+  }
+}
+function stabsHTML(){return '<div class="stabs" role="tablist"><button role="tab" data-t="caja" aria-selected="'+(staffTab==='caja')+'">Caja y sellos</button><button role="tab" data-t="carta" aria-selected="'+(staffTab==='carta')+'">Editar carta</button></div>';}
+function bindStabs(){staff.querySelectorAll('.stabs button').forEach(b=>b.onclick=async()=>{staffTab=b.dataset.t;mEdit=null;if(staffTab==='carta'&&!menuAll){staff.querySelector('.stabs').insertAdjacentHTML('afterend','<p class="psub">Cargando la carta…</p>');try{menuAll=await api.menuAll();}catch(e){mToast=msgOf(e);}}renderStaff();});}
+const catLabel=c=>(c.carta==='pasteleria'?'Pastelería · ':'')+c.name;
+const digits=v=>{const d=String(v||'').replace(/\D/g,'');return d?parseInt(d,10):null;};
+function renderMenuEditor(){
+  const cats=menuAll||[];
+  if(!cats.find(c=>c.id===mCat)&&cats[0])mCat=cats[0].id;
+  const cat=cats.find(c=>c.id===mCat);
+  let body='';
+  if(!cat){body='<p class="psub">'+esc(mToast||'No pudimos cargar la carta.')+'</p>';}
+  else if(mEdit){
+    const it=mEdit==='new'?{name:'',description:'',size:'',price:'',price2:null,tags:[],available:true}:mEdit;
+    const isNew=mEdit==='new'||!!mEdit.__new;
+    const pas=cat.carta==='pasteleria', two=!!cat.cols||it.price2!=null;
+    const ck=(v,l)=>'<label class="check"><input type="checkbox" data-tag="'+v+'"'+((it.tags||[]).includes(v)?' checked':'')+'> '+l+'</label>';
+    body='<form class="f medit" id="mForm" novalidate><p class="ptitle" style="font-size:1.2rem">'+(isNew?'Nuevo producto':'Editar producto')+'</p>'+
+      '<label>Categoría<select id="mFCat">'+cats.map(c=>'<option value="'+esc(c.id)+'"'+(c.id===mCat?' selected':'')+'>'+esc(catLabel(c))+'</option>').join('')+'</select></label>'+
+      '<label>Nombre<input id="mName" maxlength="80" value="'+esc(it.name)+'" placeholder="Ej: Latte de avellana"></label>'+
+      '<label>Descripción (opcional)<textarea id="mDesc" maxlength="300" rows="3" placeholder="Qué lleva, cómo se sirve">'+esc(it.description||'')+'</textarea></label>'+
+      (pas?'<label>Tamaño (opcional)<input id="mSize" maxlength="40" value="'+esc(it.size||'')+'" placeholder="Ej: Diámetro 28 cm"></label>':'')+
+      '<div class="mprices"><label>'+(two&&cat.cols?esc(cat.cols[0]):'Precio')+'<input id="mPrice" inputmode="numeric" value="'+(it.price!==''&&it.price!=null?Number(it.price).toLocaleString('es-CL'):'')+'" placeholder="$ 0"></label>'+
+      (two?'<label>'+(cat.cols?esc(cat.cols[1]):'Segundo precio')+'<input id="mPrice2" inputmode="numeric" value="'+(it.price2!=null?Number(it.price2).toLocaleString('es-CL'):'')+'" placeholder="$ 0"></label>':'')+'</div>'+
+      '<div class="mchecks">'+ck('vegan','Vegano')+ck('veg','Vegetariano')+ck('new','Nuevo')+'</div>'+
+      '<label class="check"><input type="checkbox" id="mAvail"'+(it.available!==false?' checked':'')+'> Visible en la web (desmárcalo si se agotó)</label>'+
+      '<p class="err" id="mErr" aria-live="polite"></p>'+
+      '<div class="actions"><button class="btn btn-gold" type="submit">Guardar</button><button class="btn btn-ghost" type="button" id="mCancel">Cancelar</button>'+(!isNew?'<button class="btn btn-ghost mdel" type="button" id="mDel">Eliminar</button>':'')+'</div></form>';
+  } else {
+    body='<div class="staff-tools"><div class="f"><label>Categoría<select id="mCat">'+cats.map(c=>'<option value="'+esc(c.id)+'"'+(c.id===mCat?' selected':'')+'>'+esc(catLabel(c))+' ('+c.items.length+')</option>').join('')+'</select></label></div><button class="btn btn-gold" id="mNew" type="button">+ Agregar producto</button></div>'+
+      (mToast?'<p class="toast" aria-live="polite">'+esc(mToast)+'</p>':'')+
+      '<ul class="clist mlist">'+(cat.items.length?cat.items.map(i=>'<li><button data-id="'+i.id+'"><span><b>'+esc(i.name)+'</b>'+(i.available===false?'<span class="prz off">Oculto</span>':'')+'<small>'+esc(i.description||i.size||'Sin descripción')+'</small></span><span class="mprice">'+clp(i.price)+(i.price2!=null?' / '+clp(i.price2):'')+'</span></button></li>').join(''):'<li class="psub">Esta categoría no tiene productos.</li>')+'</ul>'+
+      '<p class="psub">Toca un producto para cambiar su precio, descripción o esconderlo. Los cambios se ven en la web al instante.</p>';
+  }
+  staff.innerHTML='<div class="detail-head"><p class="ptitle">Panel de caja</p><button class="linkbtn" id="sOut">Salir</button></div>'+stabsHTML()+body;
+  mToast='';
+  document.getElementById('sOut').onclick=async()=>{await api.logout();staffOn=false;sel=null;list=[];stats=null;staffTab='caja';menuAll=null;renderStaff();};
+  bindStabs();
+  const sc=document.getElementById('mCat');if(sc)sc.onchange=()=>{mCat=sc.value;renderMenuEditor();};
+  const nb=document.getElementById('mNew');if(nb)nb.onclick=()=>{mEdit='new';renderMenuEditor();staff.scrollIntoView({block:'start',behavior:'smooth'});};
+  staff.querySelectorAll('.mlist button').forEach(b=>b.onclick=()=>{mEdit=JSON.parse(JSON.stringify(cat.items.find(i=>String(i.id)===b.dataset.id)));renderMenuEditor();staff.scrollIntoView({block:'start',behavior:'smooth'});});
+  const f=document.getElementById('mForm');
+  if(f){
+    const fc=document.getElementById('mFCat');fc.onchange=()=>{const keep=collect();mCat=fc.value;mEdit=Object.assign(mEdit==='new'?{}:mEdit,keep,{__new:mEdit==='new'});if(mEdit.__new){delete mEdit.id;}renderMenuEditor();};
+    function collect(){return{name:document.getElementById('mName').value,description:document.getElementById('mDesc').value,size:(document.getElementById('mSize')||{}).value||'',
+      price:digits(document.getElementById('mPrice').value),price2:document.getElementById('mPrice2')?digits(document.getElementById('mPrice2').value):null,
+      tags:[...f.querySelectorAll('[data-tag]:checked')].map(x=>x.dataset.tag),available:document.getElementById('mAvail').checked};}
+    document.getElementById('mCancel').onclick=()=>{mEdit=null;renderMenuEditor();};
+    const del=document.getElementById('mDel');
+    if(del)del.onclick=async()=>{if(!confirm('¿Eliminar "'+mEdit.name+'" de la carta? Esto no se puede deshacer. Si solo se agotó, mejor desmarca "Visible en la web".'))return;
+      setBusy(del,true);try{menuAll=await api.menuDelete(mEdit.id);window.MAG_menu.apply(menuAll);mToast='Producto eliminado.';mEdit=null;}catch(e){document.getElementById('mErr').textContent=msgOf(e);}finally{setBusy(del,false);}renderMenuEditor();};
+    f.onsubmit=async e=>{e.preventDefault();if(busy)return;const v=collect(),err=document.getElementById('mErr');
+      if(v.name.trim().length<2){err.textContent=ERR.invalid_item_name;return;}
+      if(v.price==null){err.textContent=ERR.invalid_price;return;}
+      const b=e.submitter;setBusy(b,true);
+      try{menuAll=await api.menuSave(Object.assign(v,{id:(mEdit!=='new'&&!mEdit.__new)?mEdit.id:null,category:mCat}));window.MAG_menu.apply(menuAll);
+        mToast=v.available?'Guardado. Ya se ve en la web.':'Guardado como oculto: no aparece en la web.';mEdit=null;renderMenuEditor();}
+      catch(x){err.textContent=msgOf(x);}finally{setBusy(b,false);}};
   }
 }
 function renderAll(){renderCli();renderStaff();}
