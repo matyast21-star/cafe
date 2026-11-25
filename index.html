@@ -441,6 +441,89 @@ p{margin:0}
 @keyframes mpulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.6);opacity:0}}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- Dorado + Club a pantalla completa + raspe y gane ---------- */
+:root{--gold:#D4AF5A;--gold-ink:#E9CF87;--gold-grad:linear-gradient(90deg,#A47B33 0%,#E9CF87 18%,#F6E3A6 30%,#B8893A 50%,#E9CF87 70%,#8C6A2A 86%,#A47B33 100%)}
+@keyframes goldsh{from{background-position:0 0}to{background-position:-220% 0}}
+@keyframes sweep{0%,55%{transform:translateX(-120%) rotate(8deg)}100%{transform:translateX(120%) rotate(8deg)}}
+@keyframes halo{to{transform:translateX(-50%) rotate(360deg)}}
+@keyframes readyglow{0%,100%{box-shadow:0 0 0 0 rgba(233,207,135,.55)}50%{box-shadow:0 0 0 10px rgba(233,207,135,0)}}
+.goldtxt{background:var(--gold-grad);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldsh 6s linear infinite}
+.card{border:1px solid rgba(233,207,135,.45)}
+.card .mk{background:var(--gold-grad);background-size:220% 100%;animation:goldsh 6s linear infinite}
+.card::after{content:"";position:absolute;inset:-40% -10%;background:linear-gradient(100deg,transparent 42%,rgba(255,236,190,.20) 50%,transparent 58%);animation:sweep 5.5s ease-in-out infinite;pointer-events:none}
+.card-top small{color:var(--gold-ink)}
+.stamp{border-color:rgba(233,207,135,.45)}
+.stamp.on{border-color:var(--gold);background:rgba(212,175,90,.16)}
+.stamp.gift{border-color:var(--gold)}
+.stamp.gift::after{color:var(--gold-ink)}
+.stamp.gift.ready{background:var(--gold-grad);background-size:220% 100%;animation:goldsh 6s linear infinite,readyglow 2s ease-in-out infinite}
+.stamp.gift.ready::after{color:#2A1E08}
+.prize-badge{display:flex;gap:12px;align-items:center;padding:12px 14px;border-radius:16px;background:var(--gold-grad);background-size:220% 100%;animation:goldsh 6s linear infinite;color:#24190A;font-weight:600;font-size:.92rem;line-height:1.3}
+.prize-badge .mk{width:38px;flex:none;--logo:#24190A}
+.raspe{display:grid;gap:10px}
+.raspe-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.raspe-head b{font-family:var(--f-title);text-transform:uppercase;letter-spacing:.12em;font-size:1.05rem;font-weight:500}
+.scratch{position:relative;border-radius:18px;overflow:hidden;border:1px solid rgba(233,207,135,.5);min-height:160px;display:grid;place-items:center;text-align:center;padding:18px;background:radial-gradient(circle at 50% 35%,rgba(212,175,90,.28),transparent 70%),var(--band);color:var(--band-text)}
+.scratch .res{display:grid;gap:8px;justify-items:center}
+.scratch .res b{font-family:var(--f-title);font-weight:500;text-transform:uppercase;font-size:1.7rem;letter-spacing:.06em;line-height:1.05}
+.scratch .res span{font-size:.88rem;color:var(--band-soft)}
+.scratch .res .mk-flor{width:64px;background:var(--gold-grad);background-size:220% 100%;animation:goldsh 6s linear infinite}
+.scratch .res .psub{color:var(--band-soft)}
+.scratch canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair;transition:opacity .6s ease}
+.scratch .skip{position:absolute;right:10px;bottom:8px;z-index:2;font-size:.75rem;color:#2A1E08;opacity:.75}
+.conf{position:absolute;left:50%;top:50%;width:8px;height:12px;border-radius:2px;pointer-events:none;z-index:3}
+.btn-gold{background:var(--gold-grad);background-size:220% 100%;animation:goldsh 6s linear infinite;color:#24190A;font-weight:600}
+.clist .prz{display:inline-block;margin-left:6px;padding:.1em .6em;border-radius:999px;background:var(--gold-grad);color:#24190A;font-size:.72rem;font-weight:600}
+.stats.s4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:520px){.stats.s4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.cov{position:fixed;inset:0;z-index:200;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+  background:radial-gradient(120% 70% at 50% 0%,#2A4231 0%,#15221A 52%,#0A100C 100%);color:#F5EEDF;
+  --bg:#0F1813;--surface:rgba(255,255,255,.05);--line:rgba(233,207,135,.28);--heading:#F5EEDF;--text:#F5EEDF;--soft:rgba(245,238,223,.72);
+  --accent:#D4AF5A;--accent-ink:#E9CF87;--band:#1B2B20;--band-2:#15221A;--band-text:#F5EEDF;--band-soft:rgba(245,238,223,.72);--logo:#F5EEDF}
+.cov[hidden]{display:none}
+.cov-dust{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
+.cov-halo{position:absolute;left:50%;top:-140px;width:620px;height:620px;border-radius:50%;border:1px dashed rgba(233,207,135,.22);transform:translateX(-50%);animation:halo 90s linear infinite;pointer-events:none}
+.cov-halo::after{content:"";position:absolute;inset:60px;border-radius:50%;border:1px solid rgba(233,207,135,.12)}
+.cov-x{position:fixed;top:max(16px,env(safe-area-inset-top));right:16px;z-index:3;width:48px;height:48px;border-radius:50%;border:1px solid rgba(233,207,135,.55);background:rgba(10,16,12,.55);backdrop-filter:blur(6px);color:var(--gold-ink);font-size:1.7rem;line-height:1;cursor:pointer;display:grid;place-items:center}
+.cov-in{position:relative;z-index:1;max-width:460px;margin:0 auto;padding:clamp(56px,9vh,96px) 16px 56px;display:grid;gap:24px}
+.cov-head{text-align:center;display:grid;justify-items:center;gap:10px}
+.cov-head .mk{background:var(--gold-grad);background-size:220% 100%;animation:goldsh 6s linear infinite}
+.cov-head .mk-flor{width:96px}
+.cov-head .mk-word{width:min(260px,70vw)}
+.cov-kicker{font-family:var(--f-title);letter-spacing:.5em;text-transform:uppercase;font-size:.8rem;margin:0;padding-left:.5em}
+.cov-sub{font-family:var(--f-serif);font-style:italic;font-size:1.25rem;color:var(--soft);margin:0}
+.cov-slot{perspective:1100px}
+.cov .phone-inner{background:transparent;padding:0;min-height:0;gap:18px}
+.cov .ptitle{background:var(--gold-grad);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldsh 6s linear infinite;font-size:1.8rem}
+.cov .btn-primary{background:var(--gold-grad);background-size:220% 100%;animation:goldsh 6s linear infinite;color:#24190A;font-weight:600}
+.cov .card{transform-style:preserve-3d;box-shadow:0 34px 80px -24px rgba(0,0,0,.8),0 0 70px -12px rgba(212,175,90,.4)}
+.cov .code{border-color:rgba(233,207,135,.45);background:rgba(212,175,90,.06)}
+.cov .code b{background:var(--gold-grad);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:goldsh 6s linear infinite;font-size:2.3rem}
+.cov .cmsg{color:var(--gold-ink)}
+.cov .f input{background:rgba(255,255,255,.06);border-color:rgba(233,207,135,.3);color:#F5EEDF}
+.cov .f input:focus{border-color:var(--gold)}
+.cov .linkbtn{color:var(--gold-ink)}
+.cov .hist li b{color:#F5EEDF}
+html.cov-open{overflow:hidden}
+@media (prefers-reduced-motion:reduce){.goldtxt,.card .mk,.cov .mk,.stamp.gift.ready,.prize-badge,.btn-gold,.cov .ptitle,.cov .btn-primary,.cov .code b{animation:none}.card::after,.cov-halo{animation:none}}
+
+.qr{display:grid;justify-items:center;gap:8px}
+.qr-box{background:#FBF6EA;padding:10px;border-radius:14px;box-shadow:0 0 0 1px rgba(233,207,135,.6),0 10px 30px -10px rgba(212,175,90,.5);line-height:0}
+.qr-box svg{width:168px;height:168px;display:block}
+.scan{position:fixed;inset:0;z-index:260;background:rgba(6,10,8,.92);display:grid;place-items:center;padding:16px}
+.scan[hidden]{display:none}
+.scan-in{width:min(420px,100%);display:grid;gap:14px;color:#F5EEDF;text-align:center}
+.scan-view{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:1;background:#000;border:1px solid rgba(233,207,135,.5)}
+.scan-view video{width:100%;height:100%;object-fit:cover;display:block}
+.scan-frame{position:absolute;inset:16%;border:2px solid var(--gold-ink);border-radius:18px;box-shadow:0 0 0 999px rgba(0,0,0,.35)}
+.scan-line{position:absolute;left:18%;right:18%;height:2px;top:20%;background:var(--gold-grad);box-shadow:0 0 12px var(--gold);animation:scanl 2.2s ease-in-out infinite alternate}
+@keyframes scanl{to{top:78%}}
+.scan .btn{justify-content:center}
+.scan p{margin:0;color:rgba(245,238,223,.8);font-size:.92rem}
+.staff-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
+.staff-tools .f{flex:1 1 220px}
 </style>
 
 <header class="top" id="top">
@@ -817,6 +900,31 @@ p{margin:0}
 
 <a class="wa-float wa-link" href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3Z"/></svg></a>
 
+
+<div class="scan" id="scanOv" role="dialog" aria-modal="true" aria-label="Escanear código QR" hidden>
+  <div class="scan-in">
+    <p class="ptitle goldtxt" style="font-size:1.5rem">Escanea la tarjeta</p>
+    <div class="scan-view"><video id="scanVid" playsinline muted></video><div class="scan-frame"></div><div class="scan-line"></div></div>
+    <p id="scanMsg">Apunta la cámara al código QR de la tarjeta del cliente.</p>
+    <button class="btn btn-ghost" id="scanX" style="color:#F5EEDF;border-color:rgba(233,207,135,.5)">Cancelar</button>
+  </div>
+</div>
+<div class="cov" id="clubOv" role="dialog" aria-modal="true" aria-label="Club Magnolias" hidden>
+  <canvas class="cov-dust" aria-hidden="true"></canvas>
+  <button class="cov-x" id="covX" aria-label="Cerrar el Club">&times;</button>
+  <div class="cov-in">
+    <div class="cov-halo" aria-hidden="true"></div>
+    <div class="cov-head">
+      <span class="mk mk-flor" aria-hidden="true"></span>
+      <p class="cov-kicker goldtxt">Club</p>
+      <span class="mk mk-word" role="img" aria-label="Cafetería Magnolias"></span>
+      <p class="cov-sub">9 sellos y el 10º café va por la casa. Cada compra, un raspe y gane.</p>
+    </div>
+    <div class="cov-slot" id="covSlot"></div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
@@ -1032,7 +1140,7 @@ status(); setInterval(status,60000);
 /* ---------- CLUB MAGNOLIAS: tarjeta digital (Supabase en vivo, demostración si no hay conexión) ---------- */
 (function(){
 const SUPA_URL='https://qspqdtxqybozrkgddezt.supabase.co', SUPA_KEY='sb_publishable_wf3VZ1-oEQcCl_V-PkBYlA_ufXD0CMA';
-const GOAL=9, DEMO_KEY='mag-club-v1', ME_KEY='mag-club-me', AUTH_KEY='mag-club-staff', PIN='1234';
+const GOAL=9, DEMO_KEY='mag-club-v1', ME_KEY='mag-club-me', AUTH_KEY='mag-club-staff', FREE_KEY='mag-free-seen', PIN='1234';
 const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmtPhone=p=>'+56 9 '+p.slice(1,5)+' '+p.slice(5);
 const norm=v=>{const d=String(v).replace(/\D/g,'');const t=d.slice(-9);return /^9\d{8}$/.test(t)?t:null;};
@@ -1040,27 +1148,30 @@ const day=ts=>new Date(ts).toDateString();
 const hhmm=ts=>{const d=new Date(ts);return (day(ts)===day(Date.now())?'Hoy':d.toLocaleDateString('es-CL',{day:'numeric',month:'short'}))+' '+d.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});};
 const lsGet=k=>{try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}};
 const lsSet=(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+const motion=()=>window.gsap&&!reduce;
 const ERR={consent_required:'Marca la casilla para crear tu tarjeta.',invalid_name:'Escribe tu nombre.',invalid_phone:'Escribe un celular chileno de 9 dígitos que empiece con 9.',
   already_registered:'Ese celular ya tiene tarjeta. Entra con tu celular y tu código.',not_found:'No encontramos una tarjeta con ese celular y código.',
   too_many_attempts:'Demasiados intentos. Vuelve a probar en una hora o pide tu código en caja.',not_staff:'Esta cuenta no tiene acceso al panel.',
   card_full_or_missing:'La tarjeta ya tiene 9 sellos: canjea el café gratis.',not_enough_stamps:'Aún no junta 9 sellos.',nothing_to_undo:'No hay sellos para deshacer.',
+  no_scratch:'No te quedan raspes. Cada compra te da uno nuevo.',no_prize:'Este cliente no tiene premios del raspe por canjear.',
   bad_login:'Correo o contraseña incorrectos.',network:'No pudimos conectar. Revisa tu internet e intenta de nuevo.'};
 const msgOf=e=>ERR[e&&e.message]||ERR.network;
-const fail=m=>{const e=new Error(m);throw e;};
+const fail=m=>{throw new Error(m);};
 
 /* ---- Backend real: Supabase (REST, sin librerías) ---- */
 function liveApi(){
   let auth=lsGet(AUTH_KEY);
-  async function refresh(){
+  const keep=j=>{auth={token:j.access_token,refresh:j.refresh_token,exp:Math.floor(Date.now()/1000)+j.expires_in,email:j.user&&j.user.email};lsSet(AUTH_KEY,auth);};
+  async function token(){
     if(!auth)return null;
     if(auth.exp-60>Date.now()/1000)return auth.token;
-    const r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:auth.refresh})});
-    if(!r.ok){auth=null;lsSet(AUTH_KEY,null);return null;}
-    const j=await r.json();auth={token:j.access_token,refresh:j.refresh_token,exp:Math.floor(Date.now()/1000)+j.expires_in,email:j.user&&j.user.email};lsSet(AUTH_KEY,auth);return auth.token;
+    const r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:auth.refresh})}).catch(()=>null);
+    if(!r||!r.ok){auth=null;lsSet(AUTH_KEY,null);return null;}
+    keep(await r.json());return auth.token;
   }
   async function rpc(fn,args,asStaff){
     const h={apikey:SUPA_KEY,'Content-Type':'application/json'};
-    if(asStaff){const t=await refresh();if(!t)fail('not_staff');h.Authorization='Bearer '+t;}
+    if(asStaff){const t=await token();if(!t)fail('not_staff');h.Authorization='Bearer '+t;}
     let r;try{r=await fetch(SUPA_URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:h,body:JSON.stringify(args||{})});}catch(e){fail('network');}
     const j=await r.json().catch(()=>null);
     if(!r.ok)fail(j&&j.message||'network');
@@ -1069,11 +1180,11 @@ function liveApi(){
   return {live:true,
     join:(n,p,ok)=>rpc('club_join',{p_name:n,p_phone:p,p_consent:ok}),
     card:(p,c)=>rpc('club_card',{p_phone:p,p_code:c}),
-    staffEmail:()=>auth&&auth.email,
+    scratch:(p,c)=>rpc('club_scratch',{p_phone:p,p_code:c}),
     async login(email,pw){
       let r;try{r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({email,password:pw})});}catch(e){fail('network');}
       if(!r.ok)fail('bad_login');
-      const j=await r.json();auth={token:j.access_token,refresh:j.refresh_token,exp:Math.floor(Date.now()/1000)+j.expires_in,email:j.user&&j.user.email};lsSet(AUTH_KEY,auth);
+      keep(await r.json());
       if(!(await rpc('staff_check',{},true))){await this.logout();fail('not_staff');}
     },
     async logout(){const t=auth&&auth.token;auth=null;lsSet(AUTH_KEY,null);if(t)fetch(SUPA_URL+'/auth/v1/logout',{method:'POST',headers:{apikey:SUPA_KEY,Authorization:'Bearer '+t}}).catch(()=>{});},
@@ -1082,6 +1193,7 @@ function liveApi(){
     search:q=>rpc('staff_search',{p_q:q},true),
     addStamp:id=>rpc('staff_add_stamp',{p_client:id},true),
     redeem:id=>rpc('staff_redeem',{p_client:id},true),
+    redeemPrize:id=>rpc('staff_redeem_prize',{p_client:id},true),
     undo:id=>rpc('staff_undo',{p_client:id},true)};
 }
 
@@ -1090,27 +1202,37 @@ function demoApi(){
   function seed(){const t=Date.now();return{clients:{
     '911111111':{name:'Camila (ejemplo)',phone:'911111111',code:'MAG-2741',stamps:6,rewards:1,created:t-864e6},
     '922222222':{name:'Diego (ejemplo)',phone:'922222222',code:'MAG-5308',stamps:9,rewards:0,created:t-432e6}},
-    events:[{t:t-36e5,phone:'922222222',type:'sello'},{t:t-72e5,phone:'911111111',type:'sello'}],staff:false};}
-  let S=lsGet(DEMO_KEY);if(!S||!S.clients)S=seed();
+    events:[{t:t-36e5,phone:'922222222',type:'sello'},{t:t-72e5,phone:'911111111',type:'sello'}],
+    scratches:[{phone:'911111111',won:true,scratched:false,redeemed:false},{phone:'922222222',won:false,scratched:false,redeemed:false}],staff:false};}
+  let S=lsGet(DEMO_KEY);if(!S||!S.clients)S=seed();if(!S.scratches)S.scratches=[];
   const save=()=>lsSet(DEMO_KEY,S);
+  const prizes=p=>S.scratches.filter(x=>x.phone===p&&x.won&&x.scratched&&!x.redeemed).length;
   const card=p=>{const c=S.clients[p];return{name:c.name,phone:c.phone,code:c.code,stamps:c.stamps,rewards:c.rewards,
-    history:S.events.filter(e=>e.phone===p).slice(-5).reverse().map(e=>({type:e.type,at:e.t}))};};
-  const ok=v=>Promise.resolve(v);
+    history:S.events.filter(e=>e.phone===p).slice(-5).reverse().map(e=>({type:e.type,at:e.t})),
+    scratches:S.scratches.filter(x=>x.phone===p&&!x.scratched).length,prizes:prizes(p)};};
+  const ok=v=>Promise.resolve(v), no=m=>Promise.reject(new Error(m));
+  const check=(p,c)=>{const x=S.clients[p];return x&&x.code===String(c).trim().toUpperCase();};
   return {live:false,
-    join(n,p,c){if(!c)return Promise.reject(new Error('consent_required'));if(S.clients[p])return Promise.reject(new Error('already_registered'));
+    join(n,p,c){if(!c)return no('consent_required');if(S.clients[p])return no('already_registered');
       let code;do{code='MAG-'+Math.floor(1000+Math.random()*9000);}while(Object.values(S.clients).some(x=>x.code===code));
       S.clients[p]={name:n,phone:p,code,stamps:0,rewards:0,created:Date.now()};S.events.push({t:Date.now(),phone:p,type:'alta'});save();return ok(card(p));},
-    card(p,c){const x=S.clients[p];if(!x||x.code!==String(c).trim().toUpperCase())return Promise.reject(new Error('not_found'));return ok(card(p));},
-    staffEmail:()=>null,
-    login(_,pw){if(pw!==PIN)return Promise.reject(new Error('bad_login'));S.staff=true;save();return ok();},
+    card(p,c){return check(p,c)?ok(card(p)):no('not_found');},
+    scratch(p,c){if(!check(p,c))return no('not_found');const x=S.scratches.find(s=>s.phone===p&&!s.scratched);if(!x)return no('no_scratch');
+      x.scratched=true;if(x.won)S.events.push({t:Date.now(),phone:p,type:'premio'});save();return ok({won:x.won,card:card(p)});},
+    login(_,pw){if(pw!==PIN)return no('bad_login');S.staff=true;save();return ok();},
     logout(){S.staff=false;save();return ok();},
     isStaff:()=>ok(!!S.staff),
-    stats(){return ok({clients:Object.keys(S.clients).length,stamps_today:S.events.filter(e=>e.type==='sello'&&day(e.t)===day(Date.now())).length,rewards:S.events.filter(e=>e.type==='canje').length});},
+    stats(){const td=e=>day(e.t)===day(Date.now());return ok({clients:Object.keys(S.clients).length,stamps_today:S.events.filter(e=>e.type==='sello'&&td(e)).length,
+      rewards:S.events.filter(e=>e.type==='canje'||e.type==='canje_premio').length,prizes_today:S.events.filter(e=>e.type==='premio'&&td(e)).length});},
     search(q){const qq=q.replace(/\s/g,'').toLowerCase(),d=qq.replace(/\D/g,'');
-      return ok(Object.values(S.clients).filter(c=>!qq||(d&&c.phone.includes(d))||c.code.toLowerCase().includes(qq)||c.name.toLowerCase().includes(qq)).sort((a,b)=>b.created-a.created).map(c=>({id:c.phone,name:c.name,phone:c.phone,code:c.code,stamps:c.stamps,rewards:c.rewards})));},
-    addStamp(id){const c=S.clients[id];if(c.stamps>=GOAL)return Promise.reject(new Error('card_full_or_missing'));c.stamps++;S.events.push({t:Date.now(),phone:id,type:'sello'});save();return ok(card(id));},
-    redeem(id){const c=S.clients[id];if(c.stamps<GOAL)return Promise.reject(new Error('not_enough_stamps'));c.stamps=0;c.rewards++;S.events.push({t:Date.now(),phone:id,type:'canje'});save();return ok(card(id));},
-    undo(id){const c=S.clients[id];const i=S.events.map(e=>e.phone===id&&e.type==='sello').lastIndexOf(true);if(i<0||!c.stamps)return Promise.reject(new Error('nothing_to_undo'));S.events.splice(i,1);c.stamps--;save();return ok(card(id));}};
+      return ok(Object.values(S.clients).filter(c=>!qq||(d&&c.phone.includes(d))||c.code.toLowerCase().includes(qq)||c.name.toLowerCase().includes(qq)).sort((a,b)=>b.created-a.created)
+        .map(c=>({id:c.phone,name:c.name,phone:c.phone,code:c.code,stamps:c.stamps,rewards:c.rewards,prizes:prizes(c.phone)})));},
+    addStamp(id){const c=S.clients[id];if(c.stamps>=GOAL)return no('card_full_or_missing');c.stamps++;S.events.push({t:Date.now(),phone:id,type:'sello'});
+      S.scratches.push({phone:id,won:Math.random()<.05,scratched:false,redeemed:false});save();return ok(card(id));},
+    redeem(id){const c=S.clients[id];if(c.stamps<GOAL)return no('not_enough_stamps');c.stamps=0;c.rewards++;S.events.push({t:Date.now(),phone:id,type:'canje'});save();return ok(card(id));},
+    redeemPrize(id){const x=S.scratches.find(s=>s.phone===id&&s.won&&s.scratched&&!s.redeemed);if(!x)return no('no_prize');x.redeemed=true;S.events.push({t:Date.now(),phone:id,type:'canje_premio'});save();return ok(card(id));},
+    undo(id){const c=S.clients[id];const i=S.events.map(e=>e.phone===id&&e.type==='sello').lastIndexOf(true);if(i<0||!c.stamps)return no('nothing_to_undo');
+      S.events.splice(i,1);c.stamps--;const k=S.scratches.map(s=>s.phone===id&&!s.scratched).lastIndexOf(true);if(k>=0)S.scratches.splice(k,1);save();return ok(card(id));}};
 }
 
 /* ---- ¿Hay conexión con Supabase? (en el artifact la bloquea el navegador) ---- */
@@ -1124,14 +1246,56 @@ async function pickApi(){
   return demoApi();
 }
 
+/* ---- Utilidades visuales: QR, raspe, confeti dorado ---- */
+function qrSVG(text){
+  if(typeof qrcode!=='function')return '';
+  const q=qrcode(0,'M');q.addData(text);q.make();
+  return q.createSvgTag({cellSize:4,margin:2,scalable:true}).replace(/fill="black"/g,'fill="#1B2B20"').replace(/fill="white"/g,'fill="#FBF6EA"');
+}
+function burst(box,n){
+  if(!motion())return;
+  const cols=['#F6E3A6','#E9CF87','#D4AF5A','#B8893A','#F5EEDF','#C98983'];
+  for(let i=0;i<(n||46);i++){
+    const c=document.createElement('i');c.className='conf';c.style.background=cols[i%cols.length];box.appendChild(c);
+    const a=Math.random()*Math.PI*2, d=80+Math.random()*170;
+    gsap.fromTo(c,{x:0,y:0,rotate:0,opacity:1,scale:.6+Math.random()*.8},{x:Math.cos(a)*d,y:Math.sin(a)*d-60,rotate:Math.random()*720-360,opacity:0,duration:1.3+Math.random()*.7,ease:'power3.out',onComplete:()=>c.remove()});
+  }
+}
+function makeScratch(box,onDone){
+  const cv=document.createElement('canvas');const r=box.getBoundingClientRect();const dpr=Math.min(2,window.devicePixelRatio||1);
+  cv.width=Math.max(1,Math.round(r.width*dpr));cv.height=Math.max(1,Math.round(r.height*dpr));
+  const x=cv.getContext('2d');const W=cv.width,H=cv.height;
+  const g=x.createLinearGradient(0,0,W,H);[['0','#8C6A2A'],['.22','#E9CF87'],['.45','#B8893A'],['.62','#F6E3A6'],['.82','#A47B33'],['1','#E9CF87']].forEach(([o,c])=>g.addColorStop(+o,c));
+  x.fillStyle=g;x.fillRect(0,0,W,H);
+  for(let i=0;i<260;i++){x.fillStyle='rgba(255,247,220,'+(Math.random()*.35)+')';x.fillRect(Math.random()*W,Math.random()*H,dpr*1.5,dpr*1.5);}
+  x.fillStyle='rgba(42,30,8,.82)';x.textAlign='center';x.textBaseline='middle';
+  x.font='500 '+Math.round(26*dpr)+'px Oswald, "Arial Narrow", sans-serif';x.fillText('RASPA AQUÍ',W/2,H/2-10*dpr);
+  x.font='italic '+Math.round(16*dpr)+'px "Cormorant Garamond", Garamond, serif';x.fillText('con tu dedo o el mouse',W/2,H/2+20*dpr);
+  box.appendChild(cv);
+  const skip=document.createElement('button');skip.type='button';skip.className='linkbtn skip';skip.textContent='Revelar sin raspar';box.appendChild(skip);
+  let down=false,last=null,moves=0,done=false;
+  const pt=e=>{const b=cv.getBoundingClientRect();return[(e.clientX-b.left)*dpr,(e.clientY-b.top)*dpr];};
+  function finish(){if(done)return;done=true;cv.style.opacity='0';skip.remove();setTimeout(()=>cv.remove(),650);onDone&&onDone();}
+  function cleared(){const d=x.getImageData(0,0,W,H).data;let t=0,c=0;for(let i=3;i<d.length;i+=64){t++;if(d[i]<40)c++;}return c/t;}
+  function draw(p){x.globalCompositeOperation='destination-out';x.lineCap='round';x.lineJoin='round';x.lineWidth=46*dpr;x.beginPath();x.moveTo(...(last||p));x.lineTo(...p);x.stroke();last=p;if(++moves%10===0&&cleared()>.48)finish();}
+  cv.addEventListener('pointerdown',e=>{down=true;last=null;cv.setPointerCapture(e.pointerId);draw(pt(e));});
+  cv.addEventListener('pointermove',e=>{if(down)draw(pt(e));});
+  ['pointerup','pointercancel'].forEach(t=>cv.addEventListener(t,()=>{down=false;last=null;}));
+  skip.onclick=finish;
+}
+
 const cli=document.getElementById('cliView'), staff=document.getElementById('staffView');
 const grid=document.getElementById('clubGrid'), paneCli=document.getElementById('paneCli'), paneStaff=document.getElementById('paneStaff'), note=document.getElementById('clubNote');
-let api, me=null, cliMode='join', staffOn=false, stats=null, list=[], sel=null, q='', toast='', lastPop=null, busy=false, poll=null, qTimer=null;
+const cliHome=cli.parentNode;
+let api, me=null, cliMode='join', staffOn=false, stats=null, list=[], sel=null, q='', toast='', lastPop=null, busy=false, qTimer=null, scratching=false;
 
 function stampsHTML(n){return Array.from({length:10},(_,i)=>{const gift=i===9;const on=!gift&&i<n;const ready=gift&&n>=GOAL;return '<span class="stamp'+(gift?' gift':'')+(on?' on':'')+(ready?' ready':'')+'" data-i="'+i+'"><span class="mk mk-flor"></span></span>';}).join('');}
 function msgFor(c){if(c.stamps>=GOAL)return '¡Tienes un café gratis! Pídelo en caja.';const r=GOAL-c.stamps;return c.stamps===0?'Tu primer sello llega con tu próximo café.':'Te '+(r===1?'falta 1 sello':'faltan '+r+' sellos')+' para tu café gratis.';}
-const evName=t=>t==='sello'?'+1 sello':t==='canje'?'Café de regalo':'Inscripción';
+const EV={sello:'+1 sello',canje:'Café de regalo',alta:'Inscripción',premio:'Ganó un café en el raspe',canje_premio:'Premio del raspe canjeado'};
 function setBusy(btn,on){busy=on;if(btn)btn.setAttribute('aria-busy',on?'true':'false');}
+const freeKey=c=>c.code+'#'+c.rewards;
+const freeSeen=c=>(lsGet(FREE_KEY)||[]).includes(freeKey(c));
+const markFree=c=>{const a=lsGet(FREE_KEY)||[];if(!a.includes(freeKey(c))){a.push(freeKey(c));lsSet(FREE_KEY,a.slice(-20));}};
 
 function setMe(card){
   const before=me?me.stamps:null; me=card;
@@ -1139,27 +1303,44 @@ function setMe(card){
   else lsSet(ME_KEY,null);
 }
 async function refreshMe(){
-  const s=lsGet(ME_KEY);if(!s||document.hidden)return;
-  try{const c=await api.card(s.phone,s.code);const changed=!me||c.stamps!==me.stamps||c.rewards!==me.rewards;setMe(c);if(changed)renderCli();}
+  const s=lsGet(ME_KEY);if(!s||document.hidden||scratching)return;
+  try{const c=await api.card(s.phone,s.code);const changed=!me||c.stamps!==me.stamps||c.rewards!==me.rewards||c.scratches!==me.scratches||c.prizes!==me.prizes;setMe(c);if(changed&&!scratching)renderCli();}
   catch(e){if(e.message==='not_found'){setMe(null);cliMode='login';renderCli();}}
 }
 
+function raspeHTML(){
+  if(!me.scratches)return '<div class="raspe"><div class="raspe-head"><b class="goldtxt">Raspe y gane</b></div><p class="psub">Cada compra te da un raspe con 5% de probabilidad de ganar un café. Tu próximo raspe llega con tu próximo sello.</p></div>';
+  return '<div class="raspe"><div class="raspe-head"><b class="goldtxt">Raspe y gane</b><span class="psub">'+(me.scratches===1?'Tienes 1 raspe':'Tienes '+me.scratches+' raspes')+'</span></div>'+
+    '<div class="scratch" id="scBox"><div class="res"><span class="mk mk-flor" aria-hidden="true"></span><p class="psub">Cada compra te da un raspe.<br>5% de probabilidad de ganar un café.</p><button class="btn btn-gold" id="scGo" type="button">Raspar ahora</button></div></div></div>';
+}
 function renderCli(){
   if(me){
     const h=(me.history||[]).slice(0,4);
+    const full=me.stamps>=GOAL, hideFree=full&&!freeSeen(me);
     cli.innerHTML='<div><p class="ptitle">Hola, '+esc(me.name.split(' ')[0])+'</p><p class="psub">Tu tarjeta Club Magnolias</p></div>'+
     '<div class="card"><div class="card-top"><span class="mk mk-word" aria-hidden="true"></span><small>Club<br>Magnolias</small></div><div class="stamps">'+stampsHTML(me.stamps)+'</div><div class="card-foot"><span class="card-name">'+esc(me.name)+'</span><b>'+Math.min(me.stamps,GOAL)+' / '+GOAL+'</b></div></div>'+
-    '<p class="cmsg">'+msgFor(me)+'</p>'+
-    '<div class="code"><span>Muestra este código en caja</span><b>'+esc(me.code)+'</b><span>Guárdalo: lo necesitas para volver a entrar</span></div>'+
-    (h.length?'<ul class="hist">'+h.map(e=>'<li><b>'+evName(e.type)+'</b><span>'+hhmm(e.at)+'</span></li>').join('')+'</ul>':'')+
+    (hideFree?'<div class="scratch" id="scFree"><div class="res"><span class="mk mk-flor" aria-hidden="true"></span><b class="goldtxt">¡Tu café es gratis!</b><span>Muestra tu código en caja y el barista lo canjea.</span></div></div>':'<p class="cmsg">'+msgFor(me)+'</p>')+
+    (me.prizes?'<div class="prize-badge"><span class="mk mk-flor" aria-hidden="true"></span><span>Ganaste '+(me.prizes===1?'1 café':me.prizes+' cafés')+' en el raspe. Muestra tu código en caja para canjearlo.</span></div>':'')+
+    '<div class="code"><span>Muestra este código en caja</span><div class="qr"><div class="qr-box" aria-hidden="true">'+qrSVG(me.code)+'</div></div><b>'+esc(me.code)+'</b><span>Guárdalo: lo necesitas para volver a entrar</span></div>'+
+    raspeHTML()+
+    (h.length?'<ul class="hist">'+h.map(e=>'<li><b>'+(EV[e.type]||e.type)+'</b><span>'+hhmm(e.at)+'</span></li>').join('')+'</ul>':'')+
     (me.rewards?'<p class="psub">Cafés de regalo disfrutados: '+me.rewards+'</p>':'')+
     '<button class="linkbtn" id="cliOut">Cerrar sesión</button>';
     document.getElementById('cliOut').onclick=()=>{setMe(null);cliMode='login';renderCli();};
-    if(lastPop!=null&&window.gsap&&!reduce){const st=cli.querySelector('.stamp[data-i="'+lastPop+'"] .mk');if(st)gsap.fromTo(st,{scale:2,rotate:-30,opacity:0},{scale:1,rotate:0,opacity:1,duration:.6,ease:'back.out(2.2)'});}
+    const go=document.getElementById('scGo');
+    if(go)go.onclick=async()=>{if(busy)return;setBusy(go,true);scratching=true;const box=document.getElementById('scBox');
+      try{const res=await api.scratch(me.phone,me.code);
+        box.innerHTML=res.won?'<div class="res"><span class="mk mk-flor" aria-hidden="true"></span><b class="goldtxt">¡Ganaste un café!</b><span>Muestra tu código en caja para canjearlo.</span></div>'
+                             :'<div class="res"><b>Esta vez no</b><span>Sigue sumando: cada compra es un nuevo raspe.</span></div>';
+        makeScratch(box,()=>{if(res.won)burst(box,60);setTimeout(()=>{scratching=false;setMe(res.card);renderCli();},res.won?2800:1700);});}
+      catch(e){scratching=false;box.querySelector('.psub').textContent=msgOf(e);}finally{setBusy(go,false);}};
+    const fr=document.getElementById('scFree');
+    if(fr){scratching=true;makeScratch(fr,()=>{markFree(me);burst(fr,70);setTimeout(()=>{scratching=false;},2400);});}
+    if(lastPop!=null&&motion()){const st=cli.querySelector('.stamp[data-i="'+lastPop+'"]');if(st){gsap.fromTo(st.querySelector('.mk'),{scale:2.2,rotate:-30,opacity:0},{scale:1,rotate:0,opacity:1,duration:.7,ease:'back.out(2.2)'});burst(st,18);}}
     lastPop=null; return;
   }
   if(cliMode==='join'){
-    cli.innerHTML='<div><p class="ptitle">Únete al Club Magnolias</p><p class="psub">Crea tu tarjeta digital y empieza a juntar sellos.</p></div>'+
+    cli.innerHTML='<div><p class="ptitle">Únete al Club Magnolias</p><p class="psub">Crea tu tarjeta digital, junta sellos y raspa por cada compra.</p></div>'+
     '<form class="f" id="fJoin" novalidate><label>Tu nombre<input id="jName" autocomplete="given-name" placeholder="Ej: Francisca" maxlength="40"></label>'+
     '<label>Tu celular<input id="jPhone" inputmode="tel" autocomplete="tel" placeholder="+56 9 1234 5678"></label>'+
     '<label class="check"><input type="checkbox" id="jOk"> Acepto que Magnolias guarde mi nombre y celular solo para el club.</label>'+
@@ -1172,7 +1353,7 @@ function renderCli(){
       if(!p){err.textContent=ERR.invalid_phone;return;}
       if(!document.getElementById('jOk').checked){err.textContent=ERR.consent_required;return;}
       const b=e.submitter;setBusy(b,true);
-      try{setMe(await api.join(n,p,true));renderAll();}catch(x){err.textContent=msgOf(x);if(x.message==='already_registered'){cliMode='login';setTimeout(()=>{renderCli();const lp=document.getElementById('lPhone');if(lp)lp.value=fmtPhone(p);},1600);}}
+      try{setMe(await api.join(n,p,true));renderAll();introCard();}catch(x){err.textContent=msgOf(x);if(x.message==='already_registered'){cliMode='login';setTimeout(()=>{renderCli();const lp=document.getElementById('lPhone');if(lp)lp.value=fmtPhone(p);},1600);}}
       finally{setBusy(b,false);}};
   } else {
     cli.innerHTML='<div><p class="ptitle">Entra a tu tarjeta</p><p class="psub">Usa el celular con que te inscribiste y tu código MAG.</p></div>'+
@@ -1187,10 +1368,11 @@ function renderCli(){
       if(!p){err.textContent=ERR.invalid_phone;return;}
       if(!/^MAG-[A-Z0-9]{4,5}$/.test(c)){err.textContent='Escribe tu código tal como aparece, por ejemplo MAG-7K2QP.';return;}
       const b=e.submitter;setBusy(b,true);
-      try{setMe(await api.card(p,c));renderAll();}catch(x){err.textContent=msgOf(x);}finally{setBusy(b,false);}};
+      try{setMe(await api.card(p,c));renderAll();introCard();}catch(x){err.textContent=msgOf(x);}finally{setBusy(b,false);}};
   }
 }
 
+/* ---- Panel del barista ---- */
 async function loadStaff(){
   try{const [s,l]=await Promise.all([api.stats(),api.search(q)]);stats=s;list=l||[];}
   catch(e){if(e.message==='not_staff'){staffOn=false;}toast=msgOf(e);}
@@ -1210,31 +1392,136 @@ function renderStaff(){
   }
   const c=sel&&list.find(x=>x.id===sel);
   staff.innerHTML='<div class="detail-head"><p class="ptitle">Panel de caja</p><button class="linkbtn" id="sOut">Salir</button></div>'+
-  '<div class="stats"><div class="stat"><b>'+(stats?stats.clients:'–')+'</b><span>clientes inscritos</span></div><div class="stat"><b>'+(stats?stats.stamps_today:'–')+'</b><span>sellos hoy</span></div><div class="stat"><b>'+(stats?stats.rewards:'–')+'</b><span>cafés regalados</span></div></div>'+
-  '<div class="f"><label>Buscar por celular, código o nombre<input id="sq" value="'+esc(q)+'" placeholder="Ej: 9 1111 1111 o MAG-2741"></label></div>'+
-  '<ul class="clist">'+(list.length?list.map(x=>'<li><button data-id="'+esc(x.id)+'" aria-pressed="'+(x.id===sel)+'"><span><b>'+esc(x.name)+'</b><small>'+esc(x.code)+' · '+fmtPhone(x.phone)+'</small></span><span class="mini">'+Array.from({length:GOAL},(_,i)=>'<i class="'+(i<x.stamps?'on':'')+'"></i>').join('')+'</span></button></li>').join(''):'<li class="psub">Sin resultados. Pídele al cliente que se inscriba desde la web.</li>')+'</ul>'+
-  (c?'<div class="detail"><div class="detail-head"><b>'+esc(c.name)+'</b><span class="psub">'+esc(c.code)+'</span></div>'+
+  '<div class="stats s4"><div class="stat"><b>'+(stats?stats.clients:'–')+'</b><span>clientes inscritos</span></div><div class="stat"><b>'+(stats?stats.stamps_today:'–')+'</b><span>sellos hoy</span></div><div class="stat"><b>'+(stats?stats.prizes_today:'–')+'</b><span>premios del raspe hoy</span></div><div class="stat"><b>'+(stats?stats.rewards:'–')+'</b><span>cafés regalados</span></div></div>'+
+  '<div class="staff-tools"><div class="f"><label>Buscar por celular, código o nombre<input id="sq" value="'+esc(q)+'" placeholder="Ej: 9 1111 1111 o MAG-2741"></label></div><button class="btn btn-gold" id="sScan" type="button">Escanear QR</button></div>'+
+  '<ul class="clist">'+(list.length?list.map(x=>'<li><button data-id="'+esc(x.id)+'" aria-pressed="'+(x.id===sel)+'"><span><b>'+esc(x.name)+'</b>'+(x.prizes?'<span class="prz">'+(x.prizes==1?'1 premio':x.prizes+' premios')+'</span>':'')+'<small>'+esc(x.code)+' · '+fmtPhone(x.phone)+'</small></span><span class="mini">'+Array.from({length:GOAL},(_,i)=>'<i class="'+(i<x.stamps?'on':'')+'"></i>').join('')+'</span></button></li>').join(''):'<li class="psub">Sin resultados. Pídele al cliente que se inscriba desde la web.</li>')+'</ul>'+
+  (c?'<div class="detail" id="sDetail"><div class="detail-head"><b>'+esc(c.name)+'</b><span class="psub">'+esc(c.code)+'</span></div>'+
     '<div class="bar"><i style="width:'+(Math.min(c.stamps,GOAL)/GOAL*100)+'%"></i></div>'+
-    '<p class="psub">'+Math.min(c.stamps,GOAL)+' de '+GOAL+' sellos'+(c.stamps>=GOAL?' · <b style="color:var(--accent-ink)">tiene un café gratis</b>':'')+'</p>'+
-    '<div class="actions"><button class="btn btn-primary" id="aStamp"'+(c.stamps>=GOAL?' disabled':'')+'>+1 sello</button><button class="btn btn-rose" id="aRedeem"'+(c.stamps>=GOAL?'':' disabled')+'>Canjear café gratis</button><button class="btn btn-ghost" id="aUndo">Deshacer último sello</button></div>'+
-    '<p class="toast" aria-live="polite">'+esc(toast)+'</p></div>':'<p class="psub">Elige un cliente de la lista para sumar sellos.</p>'+(toast?'<p class="toast" aria-live="polite">'+esc(toast)+'</p>':''));
+    '<p class="psub">'+Math.min(c.stamps,GOAL)+' de '+GOAL+' sellos'+(c.stamps>=GOAL?' · <b style="color:var(--accent-ink)">tiene un café gratis</b>':'')+(c.prizes?' · <b style="color:var(--accent-ink)">'+(c.prizes==1?'1 premio del raspe':c.prizes+' premios del raspe')+'</b>':'')+'</p>'+
+    '<div class="actions"><button class="btn btn-primary" id="aStamp"'+(c.stamps>=GOAL?' disabled':'')+'>+1 sello</button><button class="btn btn-rose" id="aRedeem"'+(c.stamps>=GOAL?'':' disabled')+'>Canjear café gratis</button><button class="btn btn-gold" id="aPrize"'+(c.prizes?'':' disabled')+'>Canjear premio del raspe</button><button class="btn btn-ghost" id="aUndo">Deshacer último sello</button></div>'+
+    '<p class="toast" aria-live="polite">'+esc(toast)+'</p></div>':'<p class="psub">Escanea el QR del cliente o elígelo de la lista para sumar sellos.</p>'+(toast?'<p class="toast" aria-live="polite">'+esc(toast)+'</p>':''));
   toast='';
   document.getElementById('sOut').onclick=async()=>{await api.logout();staffOn=false;sel=null;list=[];stats=null;renderStaff();};
+  document.getElementById('sScan').onclick=openScanner;
   const sq=document.getElementById('sq');
   sq.oninput=()=>{q=sq.value;clearTimeout(qTimer);qTimer=setTimeout(async()=>{try{list=await api.search(q)||[];}catch(e){toast=msgOf(e);}const pos=sq.selectionStart;renderStaff();const n=document.getElementById('sq');n.focus();n.setSelectionRange(pos,pos);},api.live?280:0);};
   staff.querySelectorAll('.clist button').forEach(b=>b.onclick=()=>{sel=b.dataset.id;renderStaff();});
   if(c){
     const act=(id,fn,okMsg)=>{const b=document.getElementById(id);b.onclick=async()=>{if(busy)return;setBusy(b,true);
-      try{const card=await fn(c.id);Object.assign(c,{stamps:card.stamps,rewards:card.rewards});toast=okMsg(card);
+      try{const card=await fn(c.id);Object.assign(c,{stamps:card.stamps,rewards:card.rewards,prizes:card.prizes});toast=okMsg(card);
         if(!api.live&&me&&me.phone===card.phone){setMe(card);renderCli();}
         stats=await api.stats();}
       catch(x){toast=msgOf(x);}finally{setBusy(b,false);renderStaff();}};};
-    act('aStamp',api.addStamp,()=>'Sello agregado a '+c.name+'.');
+    act('aStamp',api.addStamp,()=>'Sello agregado a '+c.name+'. Le llegó un raspe.');
     act('aRedeem',api.redeem,()=>'Café de regalo canjeado. La tarjeta vuelve a cero.');
+    act('aPrize',api.redeemPrize,()=>'Premio del raspe canjeado.');
     act('aUndo',api.undo,()=>'Último sello eliminado.');
   }
 }
 function renderAll(){renderCli();renderStaff();}
+
+/* ---- Escáner QR del barista (cámara del teléfono) ---- */
+const scanOv=document.getElementById('scanOv'), scanVid=document.getElementById('scanVid'), scanMsg=document.getElementById('scanMsg');
+let scanStream=null, scanLoop=0, jsqrLoading=null;
+function loadJsQR(){if(window.jsQR)return Promise.resolve();if(!jsqrLoading)jsqrLoading=new Promise((ok,ko)=>{const s=document.createElement('script');s.src='js/jsQR.js';s.onload=ok;s.onerror=ko;document.head.appendChild(s);});return jsqrLoading;}
+function stopScanner(){cancelAnimationFrame(scanLoop);scanLoop=0;if(scanStream){scanStream.getTracks().forEach(t=>t.stop());scanStream=null;}scanVid.srcObject=null;scanOv.hidden=true;}
+async function openScanner(){
+  scanOv.hidden=false;scanMsg.textContent='Apunta la cámara al código QR de la tarjeta del cliente.';
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){scanMsg.textContent='Este navegador no permite usar la cámara. Busca al cliente por su código.';return;}
+  try{scanStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false});}
+  catch(e){scanMsg.textContent='No pudimos abrir la cámara. Revisa el permiso de cámara del navegador.';return;}
+  scanVid.srcObject=scanStream;await scanVid.play().catch(()=>{});
+  let detector=null;
+  if('BarcodeDetector' in window){try{detector=new BarcodeDetector({formats:['qr_code']});}catch(e){}}
+  if(!detector){try{await loadJsQR();}catch(e){scanMsg.textContent='No pudimos cargar el lector de QR.';return;}}
+  const cv=document.createElement('canvas'), cx=cv.getContext('2d',{willReadFrequently:true});
+  async function tick(){
+    if(!scanStream)return;
+    let txt=null;
+    if(scanVid.readyState>=2){
+      try{
+        if(detector){const r=await detector.detect(scanVid);if(r[0])txt=r[0].rawValue;}
+        else{const w=scanVid.videoWidth,h=scanVid.videoHeight,k=Math.min(1,640/Math.max(w,h));cv.width=w*k;cv.height=h*k;cx.drawImage(scanVid,0,0,cv.width,cv.height);
+          const r=window.jsQR(cx.getImageData(0,0,cv.width,cv.height).data,cv.width,cv.height,{inversionAttempts:'dontInvert'});if(r)txt=r.data;}
+      }catch(e){}
+    }
+    const m=txt&&String(txt).toUpperCase().match(/MAG-[A-Z0-9]{4,5}/);
+    if(m){stopScanner();if(navigator.vibrate)navigator.vibrate(60);await pickByCode(m[0]);return;}
+    scanLoop=requestAnimationFrame(tick);
+  }
+  tick();
+}
+async function pickByCode(code){
+  q=code;
+  try{list=await api.search(code)||[];}catch(e){toast=msgOf(e);}
+  const hit=list.find(x=>x.code===code);
+  sel=hit?hit.id:null;
+  toast=hit?'Tarjeta de '+hit.name+' lista. Toca "+1 sello" para sumar su café.':'No encontramos la tarjeta '+code+'.';
+  renderStaff();
+  const d=document.getElementById('sDetail');if(d){d.scrollIntoView({block:'center',behavior:'smooth'});if(motion())gsap.fromTo(d,{boxShadow:'0 0 0 0 rgba(233,207,135,.9)'},{boxShadow:'0 0 0 14px rgba(233,207,135,0)',duration:1.2});}
+}
+document.getElementById('scanX').onclick=stopScanner;
+
+/* ---- Club a pantalla completa ---- */
+const ov=document.getElementById('clubOv'), slot=document.getElementById('covSlot'), dust=ov.querySelector('.cov-dust');
+let dustRaf=0, lastFocus=null;
+function startDust(){
+  if(reduce)return;
+  const ctx=dust.getContext('2d');const dpr=Math.min(2,window.devicePixelRatio||1);
+  const size=()=>{dust.width=innerWidth*dpr;dust.height=innerHeight*dpr;};size();window.addEventListener('resize',size);
+  const P=Array.from({length:70},()=>({x:Math.random(),y:Math.random(),r:.6+Math.random()*1.9,v:.0004+Math.random()*.0012,p:Math.random()*6.28,d:(Math.random()-.5)*.0004}));
+  (function loop(){
+    ctx.clearRect(0,0,dust.width,dust.height);
+    for(const o of P){o.y-=o.v;o.x+=o.d+Math.sin(o.p+=.02)*.0003;if(o.y<-.02){o.y=1.02;o.x=Math.random();}
+      const a=.35+.45*Math.sin(o.p*2);ctx.beginPath();ctx.fillStyle='rgba(233,207,135,'+a.toFixed(2)+')';ctx.shadowColor='rgba(233,207,135,.8)';ctx.shadowBlur=8*dpr;
+      ctx.arc(o.x*dust.width,o.y*dust.height,o.r*dpr,0,6.283);ctx.fill();}
+    dustRaf=requestAnimationFrame(loop);
+  })();
+}
+function introCard(){
+  if(!motion()||ov.hidden)return;
+  const card=cli.querySelector('.card');if(!card)return;
+  const tl=gsap.timeline();
+  tl.fromTo(card,{rotateX:-75,y:60,opacity:0,transformPerspective:1000},{rotateX:0,y:0,opacity:1,duration:1.1,ease:'power4.out'})
+    .from(card.querySelectorAll('.stamp'),{scale:0,opacity:0,duration:.45,stagger:.06,ease:'back.out(2.4)'},'-=.55')
+    .from(cli.querySelectorAll('.cmsg,.scratch,.prize-badge,.code,.raspe,.hist,.linkbtn'),{y:24,opacity:0,duration:.6,stagger:.08,ease:'power2.out'},'-=.3');
+}
+function openClub(ev){
+  if(!ov.hidden)return;
+  lastFocus=document.activeElement;
+  slot.appendChild(cli);
+  ov.hidden=false;document.documentElement.classList.add('cov-open');
+  try{if(location.hash!=='#club')history.pushState({club:1},'','#club');}catch(e){}
+  ov.scrollTop=0;startDust();
+  if(motion()){
+    const x=ev&&ev.clientX!=null?ev.clientX:innerWidth/2, y=ev&&ev.clientY!=null?ev.clientY:80;
+    const tl=gsap.timeline();
+    tl.fromTo(ov,{clipPath:'circle(0px at '+x+'px '+y+'px)'},{clipPath:'circle('+Math.hypot(innerWidth,innerHeight)+'px at '+x+'px '+y+'px)',duration:.95,ease:'power3.inOut',clearProps:'clipPath'})
+      .from('.cov-head .mk-flor',{scale:.3,rotate:-40,opacity:0,duration:1,ease:'back.out(1.8)'},'-=.45')
+      .from('.cov-head > :not(.mk-flor)',{y:26,opacity:0,duration:.7,stagger:.09,ease:'power3.out'},'-=.7')
+      .from('.cov-halo',{scale:.6,opacity:0,duration:1.4,ease:'power2.out'},'-=.9')
+      .from('.cov-x',{scale:0,rotate:-90,duration:.5,ease:'back.out(2)'},'-=1');
+    if(me)tl.add(introCard,'-=.6');
+    else tl.from(cli.children,{y:30,opacity:0,duration:.6,stagger:.08,ease:'power2.out'},'-=.6');
+  }
+  setTimeout(()=>document.getElementById('covX').focus({preventScroll:true}),50);
+}
+function closeClub(fromPop){
+  if(ov.hidden)return;
+  const done=()=>{ov.hidden=true;document.documentElement.classList.remove('cov-open');cancelAnimationFrame(dustRaf);cliHome.appendChild(cli);if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});};
+  if(!fromPop){try{if(history.state&&history.state.club)history.back();else history.replaceState(null,'',location.pathname+location.search);}catch(e){}}
+  if(motion())gsap.to(ov,{opacity:0,scale:1.03,duration:.4,ease:'power2.in',onComplete:()=>{gsap.set(ov,{clearProps:'opacity,scale'});done();}});else done();
+}
+document.getElementById('covX').onclick=()=>closeClub();
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!scanOv.hidden)stopScanner();else closeClub();}});
+window.addEventListener('popstate',()=>{if(!ov.hidden&&location.hash!=='#club')closeClub(true);});
+document.querySelectorAll('a[href="#club"]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();openClub(e);}));
+/* inclinación 3D de la tarjeta con el mouse */
+if(window.matchMedia('(pointer:fine)').matches)ov.addEventListener('pointermove',e=>{
+  if(!motion())return;const card=cli.querySelector('.card');if(!card)return;
+  const b=card.getBoundingClientRect();const dx=(e.clientX-(b.left+b.width/2))/innerWidth, dy=(e.clientY-(b.top+b.height/2))/innerHeight;
+  gsap.to(card,{rotateY:dx*18,rotateX:-dy*14,transformPerspective:900,duration:.6,ease:'power2.out'});
+});
 
 /* Diseño según el modo: en vivo, los clientes ven solo su tarjeta; el panel vive en #caja */
 function layout(){
@@ -1248,14 +1535,15 @@ function layout(){
 (async function init(){
   cli.innerHTML='<p class="psub">Cargando tu tarjeta…</p>';
   api=await pickApi();
-  if(api.live&&note){note.innerHTML='<span><b>Tu tarjeta queda guardada.</b> Inscríbete aquí, guarda tu código MAG y muéstralo en caja cada vez que pidas un café, té o mocktail. Tus sellos aparecen en tu celular al instante.</span>';}
+  if(api.live&&note){note.innerHTML='<span><b>Tu tarjeta queda guardada.</b> Inscríbete aquí, guarda tu código MAG y muéstralo en caja cada vez que pidas un café, té o mocktail. Cada compra suma un sello y te da un raspe y gane.</span>';}
   const s=lsGet(ME_KEY);
   if(s){try{me=await api.card(s.phone,s.code);}catch(e){if(e.message==='not_found')lsSet(ME_KEY,null);cliMode='login';}}
   staffOn=await api.isStaff();
   layout(); window.addEventListener('hashchange',layout);
   renderCli();
   if(staffOn)await loadStaff();else renderStaff();
-  if(api.live){poll=setInterval(()=>{if(me)refreshMe();},15000);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&me)refreshMe();});}
+  if(location.hash==='#club')openClub();
+  if(api.live){setInterval(()=>{if(me)refreshMe();},15000);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&me)refreshMe();});}
   else window.addEventListener('storage',e=>{if(e.key===DEMO_KEY){api=demoApi();if(me)refreshMe();if(staffOn)loadStaff();}});
 })();
 })();
