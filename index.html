@@ -1,0 +1,1307 @@
+<meta charset="utf-8">
+<title>Cafetería Magnolias</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Cafetería de especialidad en Casablanca, Chile. Cocina tradicional, vegetariana y vegana. Pet friendly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Oswald:wght@400;500;600&display=swap">
+<style>
+/* Layout: Cafetería Magnolias — un recorrido vertical por arcos de jardín; la carta se lee como carta impresa con líneas de puntos. */
+:root{
+  --marfil:#F5EEDF; --bosque:#344C3A; --arcilla:#C98983;
+  /* modo oscuro: predeterminado */
+  --bg:#141B16; --surface:#1C2620; --surface-2:#1A231D;
+  --text:#ECE5D5; --soft:#AEB6A8; --heading:#F5EEDF;
+  --accent:#D79A93; --accent-ink:#E3AAA3; --accent-soft:#3A2826;
+  --band:#22352A; --band-2:#1A291F; --band-text:#F5EEDF; --band-soft:#B8C6B4;
+  --line:rgba(245,238,223,.16); --logo:#F5EEDF; --leaf:#8DBB8A;
+  --shadow:0 18px 40px -24px rgba(0,0,0,.8);
+  --header-bg:rgba(20,27,22,.88);
+  --map-bg:#18221B; --map-street:#33443A; --map-main:#4A6352; --map-park:#22352A; --map-text:#9FB09F; --map-block:rgba(245,238,223,.035);
+  --f-title:"Oswald","Arial Narrow",Impact,sans-serif;
+  --f-body:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-serif:"Cormorant Garamond","Garamond","Times New Roman",serif;
+  --r:18px; --arch:999px 999px 22px 22px;
+  --wrap:1180px;
+  color-scheme:dark;
+}
+/* modo claro: fondo blanco (se activa con el botón sol/luna) */
+:root[data-mode="light"]{
+  --bg:#FFFFFF; --surface:#FAF6EE; --surface-2:#F5EEDF;
+  --text:#1F2620; --soft:#5A6457; --heading:#26382B;
+  --accent:#C98983; --accent-ink:#9A5953; --accent-soft:#F5E4E0;
+  --band:#344C3A; --band-2:#2A3F30; --band-text:#F5EEDF; --band-soft:#C9D3C3;
+  --line:rgba(52,76,58,.18); --logo:#161616; --leaf:#4E7A50;
+  --shadow:0 18px 40px -24px rgba(38,56,43,.4);
+  --header-bg:rgba(255,255,255,.9);
+  --map-bg:#FBF8F1; --map-street:#E3D8C2; --map-main:#CDBE9F; --map-park:#DCE6D6; --map-text:#6B7568; --map-block:rgba(52,76,58,.045);
+  color-scheme:light;
+}
+body{transition:background-color .35s ease,color .35s ease}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{background:var(--bg);color:var(--text);font-family:var(--f-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+@media(min-width:760px){.wrap{padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}}
+h1,h2,h3{font-family:var(--f-title);font-weight:500;color:var(--heading);text-transform:uppercase;letter-spacing:.02em;line-height:1.04;margin:0;text-wrap:balance}
+p{margin:0}
+.kicker{font-family:var(--f-serif);font-style:italic;font-weight:500;font-size:clamp(1.35rem,2.2vw,1.7rem);color:var(--accent-ink);display:flex;align-items:center;gap:.7em;line-height:1.2}
+.kicker::before,.kicker::after{content:"";height:1px;width:34px;background:currentColor;opacity:.6}
+.kicker.left::before{display:none}
+.label{font-family:var(--f-title);text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:500}
+.sec{padding-block:clamp(64px,9vw,120px)}
+.sec-head{display:grid;gap:14px;margin-bottom:clamp(28px,4vw,48px);max-width:720px}
+.sec-head h2{font-size:clamp(2.2rem,5vw,3.6rem)}
+.sec-head p{color:var(--soft);font-size:1.06rem;max-width:60ch}
+
+/* marca (máscaras de logo) */
+.mk{display:block;background:var(--logo);-webkit-mask:var(--m) center/contain no-repeat;mask:var(--m) center/contain no-repeat}
+.mk-word{--m:url(media/wordmark.png);aspect-ratio:830/244}
+.mk-flor{--m:url(media/flor.png);aspect-ratio:708/490}
+.mk-logo{--m:url(media/logo.png);aspect-ratio:830/758}
+
+/* botones */
+.btn{display:inline-flex;align-items:center;gap:.6em;font-family:var(--f-title);text-transform:uppercase;letter-spacing:.1em;font-size:.9rem;font-weight:500;padding:.95em 1.5em;border-radius:999px;text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:transform .25s ease,background .25s ease,color .25s ease;background:none;color:inherit}
+.btn:hover{transform:translateY(-2px)}
+.btn svg{width:1.15em;height:1.15em;flex:none}
+.btn-primary{background:var(--band);color:var(--band-text)}
+.btn-primary:hover{background:var(--band-2)}
+.btn-rose{background:var(--accent);color:#2A1C1A}
+.btn-ghost{border-color:var(--line);color:var(--heading)}
+.btn-ghost:hover{border-color:var(--accent)}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:var(--header-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid transparent;transition:border-color .3s}
+.top.scrolled{border-color:var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;min-height:104px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.brand{gap:14px}
+.brand .mk-flor{width:88px}
+.brand .mk-word{width:250px}
+@media(max-width:520px){.top .wrap{min-height:84px}.brand{gap:10px}.brand .mk-flor{width:62px}.brand .mk-word{width:178px}}
+.mk-logo-h{--m:url(media/logo-h.png);aspect-ratio:1077/330}
+.hero-logo{width:clamp(260px,30vw,380px);background:var(--accent)}
+@media(max-width:860px){.hero-logo{width:min(300px,80vw)}}
+.nav{display:flex;gap:4px;margin-left:auto}
+.nav a{white-space:nowrap;font-family:var(--f-title);text-transform:uppercase;letter-spacing:.1em;font-size:.82rem;text-decoration:none;padding:.55em .8em;border-radius:999px;color:var(--heading)}
+.nav a:hover{background:var(--surface-2)}
+.top .btn{padding:.7em 1.1em;font-size:.8rem;white-space:nowrap;flex:none}
+.mode-btn{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:none;color:var(--heading);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.mode-btn:hover{background:var(--surface)}
+.mode-btn svg{width:20px;height:20px}
+.mode-btn .sun{display:none}
+:root[data-mode="light"] .mode-btn .sun{display:block}
+:root[data-mode="light"] .mode-btn .moon{display:none}
+.menu-btn{display:none!important;background:none;border:1.5px solid var(--line);color:var(--heading);border-radius:999px;width:44px;height:44px;align-items:center;justify-content:center;cursor:pointer}
+@media(max-width:1200px){
+  .top .btn{display:none}
+  .brand .mk-flor{width:62px}.brand .mk-word{width:176px}
+  .top .wrap{gap:12px;min-height:88px}
+  .nav{gap:0}
+  .nav a{padding:.5em .55em;letter-spacing:.07em}
+}
+@media(max-width:840px){
+  .top .wrap{flex-wrap:wrap;row-gap:0;padding-top:10px}
+  .mode-btn{margin-left:auto}
+  .nav{order:3;width:100%;margin-left:0;justify-content:center;overflow-x:auto;scrollbar-width:none;border-top:1px solid var(--line);padding-block:6px;margin-top:8px}
+  .nav::-webkit-scrollbar{display:none}
+}
+@media(max-width:480px){.nav{justify-content:flex-start}.nav a{font-size:.76rem;padding:.5em .5em}}
+
+/* hero */
+.hero{position:relative;padding-block:clamp(28px,5vw,64px) clamp(48px,7vw,90px);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,72px);align-items:center}
+.hero-copy{display:grid;gap:22px;min-width:0;position:relative;z-index:2}
+.hero h1{font-size:clamp(2.5rem,5.4vw,4.5rem);font-weight:500;line-height:.98}
+.hero h1 em{font-family:var(--f-serif);font-style:italic;font-weight:500;text-transform:none;letter-spacing:0;color:var(--accent-ink);font-size:1.02em}
+.hero-lead{font-size:clamp(1.05rem,1.4vw,1.2rem);color:var(--soft);max-width:48ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;color:var(--soft);font-size:.95rem}
+.status{display:inline-flex;align-items:center;gap:.55em;font-weight:500;color:var(--heading)}
+.status i{width:9px;height:9px;border-radius:50%;background:#8a8f86;flex:none}
+.status.open i{background:#5FA36A;box-shadow:0 0 0 4px rgba(95,163,106,.2)}
+.stars{color:var(--accent-ink);letter-spacing:.08em}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:.45em;padding:.42em .85em;border-radius:999px;background:var(--surface);border:1px solid var(--line);font-size:.86rem;color:var(--heading)}
+.chip svg{width:15px;height:15px}
+.hero-media{position:relative;min-width:0;justify-self:center;width:min(100%,440px)}
+.arch{border-radius:var(--arch);overflow:hidden;position:relative;background:var(--surface-2);box-shadow:var(--shadow)}
+.hero-media .arch{aspect-ratio:4/5.4}
+.arch video,.arch img{width:100%;height:100%;object-fit:cover}
+.hero-media .ring{position:absolute;inset:-14px;border:1px solid var(--accent);border-radius:var(--arch);opacity:.55;pointer-events:none}
+.hero-badge{position:absolute;left:-26px;bottom:34px;background:var(--surface);border-radius:16px;padding:12px 16px;box-shadow:var(--shadow);display:grid;gap:2px;max-width:220px}
+.hero-badge b{font-family:var(--f-title);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--heading);font-size:1.05rem}
+.hero-badge span{font-size:.84rem;color:var(--soft)}
+.hero-flor{position:absolute;right:-60px;top:-30px;width:min(520px,60vw);opacity:.08;z-index:0;pointer-events:none}
+@media(max-width:860px){
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-media{width:min(100%,360px);order:-1}
+  .hero-badge{left:-8px;bottom:18px}
+}
+
+/* marquee */
+.ribbon{background:var(--band);color:var(--band-text);overflow:hidden;padding-block:16px}
+.ribbon-track{display:flex;width:max-content;gap:0}
+.ribbon-set{display:flex;align-items:center;flex:none}
+.ribbon span{font-family:var(--f-title);text-transform:uppercase;letter-spacing:.14em;font-size:1rem;white-space:nowrap;padding-inline:22px}
+.ribbon .dot{width:30px;flex:none;--logo:var(--band-text)}
+
+/* cartas */
+.cartas-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:28px;max-width:720px}
+.cs-btn{text-align:left;padding:18px 20px;border-radius:var(--r);border:1.5px solid var(--line);background:var(--surface);cursor:pointer;display:grid;gap:4px;color:var(--text);font:inherit;transition:border-color .25s,background .25s}
+.cs-btn b{font-family:var(--f-title);text-transform:uppercase;letter-spacing:.06em;font-weight:500;font-size:1.25rem;color:var(--heading)}
+.cs-btn span{font-size:.9rem;color:var(--soft)}
+.cs-btn[aria-selected="true"]{border-color:var(--band);background:var(--band);color:var(--band-text)}
+.cs-btn[aria-selected="true"] b{color:var(--band-text)}
+.cs-btn[aria-selected="true"] span{color:var(--band-soft)}
+
+.carta{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:start}
+.carta-photo{position:sticky;top:124px;display:grid;gap:14px}
+.carta-photo .arch{aspect-ratio:4/5}
+.carta-photo .arch img{transition:opacity .35s}
+.carta-photo small{color:var(--soft);font-size:.85rem}
+.carta-body{min-width:0}
+.cats{display:flex;gap:8px;overflow-x:auto;padding-bottom:10px;margin-bottom:10px;scrollbar-width:thin}
+.cat{flex:none;font-family:var(--f-title);text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;padding:.6em 1em;border-radius:999px;border:1px solid var(--line);background:none;color:var(--heading);cursor:pointer}
+.cat[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#2A1C1A}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:20px;font-size:.9rem;color:var(--soft)}
+.filters button{display:inline-flex;align-items:center;gap:.4em;font:inherit;font-size:.88rem;padding:.4em .85em;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--heading);cursor:pointer}
+.filters button[aria-pressed="true"]{border-color:var(--leaf);background:color-mix(in srgb,var(--leaf) 16%,var(--surface))}
+.filters svg{width:15px;height:15px}
+.cat-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:6px}
+.cat-title h3{font-size:clamp(1.6rem,3vw,2.2rem)}
+.cat-title p{font-family:var(--f-serif);font-style:italic;font-size:1.2rem;color:var(--accent-ink)}
+.cols{display:flex;gap:18px;font-family:var(--f-title);text-transform:uppercase;letter-spacing:.1em;font-size:.75rem;color:var(--soft)}
+.items{list-style:none;margin:0;padding:0}
+.item{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 18px;padding:16px 0;border-bottom:1px dashed var(--line)}
+.item-name{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;font-family:var(--f-title);text-transform:uppercase;letter-spacing:.04em;font-size:1.1rem;color:var(--heading);font-weight:500}
+.item-desc{grid-column:1;color:var(--soft);font-size:.95rem;max-width:62ch}
+.price{grid-row:1;grid-column:2;font-family:var(--f-title);font-size:1.1rem;color:var(--heading);font-variant-numeric:tabular-nums;white-space:nowrap;display:flex;gap:18px}
+.tag{font-family:var(--f-body);text-transform:none;letter-spacing:0;font-size:.72rem;font-weight:700;padding:.15em .6em;border-radius:999px;display:inline-flex;align-items:center;gap:.3em}
+.tag svg{width:12px;height:12px}
+.tag-vegan{background:color-mix(in srgb,var(--leaf) 20%,transparent);color:var(--leaf)}
+.tag-veg{border:1px solid color-mix(in srgb,var(--leaf) 60%,transparent);color:var(--leaf)}
+.tag-new{background:var(--accent);color:#2A1C1A}
+.empty{padding:28px 0;color:var(--soft)}
+.carta-foot{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;color:var(--soft);font-size:.92rem}
+.carta-foot a{color:var(--accent-ink)}
+@media(max-width:860px){
+  .carta{grid-template-columns:1fr}
+  .carta-photo{position:static;grid-template-columns:120px 1fr;align-items:center}
+  .carta-photo .arch{aspect-ratio:3/4}
+}
+
+/* pastelería */
+.pas{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(24px,4vw,56px);align-items:start}
+.pas-photos{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pas-photos .arch{aspect-ratio:3/4}
+.pas-photos .arch:nth-child(2){margin-top:48px}
+.pas-photos figure{margin:0;display:grid;gap:8px}
+.pas-photos figcaption{font-family:var(--f-serif);font-style:italic;font-size:1.1rem;color:var(--accent-ink);text-align:center}
+.pas-lists{display:grid;gap:30px;min-width:0}
+.pas-group h3{font-size:1.5rem;display:flex;align-items:center;gap:10px;margin-bottom:4px}
+.pas-group h3 svg{width:22px;height:22px;color:var(--leaf)}
+.size{font-family:var(--f-body);text-transform:none;letter-spacing:0;font-size:.8rem;color:var(--soft);font-weight:400}
+.pas-note{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.pas-note p{max-width:44ch;color:var(--soft)}
+@media(max-width:860px){.pas{grid-template-columns:1fr}}
+
+/* galería */
+.gal-sec{background:var(--surface-2)}
+.gal-head{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.gal-ctrl{display:flex;gap:10px}
+.round{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--line);background:var(--bg);color:var(--heading);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.round:hover{background:var(--surface)}
+.round svg{width:20px;height:20px}
+.gallery{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:max(16px,calc((100vw - var(--wrap))/2 + 32px));padding-block:6px 18px;padding-left:max(16px,calc((100vw - var(--wrap))/2 + 32px));padding-right:max(16px,env(safe-area-inset-right,0px));scrollbar-width:none;cursor:grab}
+.gallery::-webkit-scrollbar{display:none}
+.gallery.drag{cursor:grabbing;scroll-snap-type:none}
+.slide{flex:none;width:clamp(230px,26vw,320px);scroll-snap-align:start;margin:0;position:relative;display:grid;gap:10px}
+.slide .frame{aspect-ratio:4/5.6;border-radius:22px;overflow:hidden;background:var(--bg);position:relative}
+.slide:nth-child(3n+2) .frame{border-radius:var(--arch)}
+.slide img,.slide video{width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none;pointer-events:none}
+.slide figcaption{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.slide figcaption b{font-family:var(--f-title);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--heading)}
+.slide figcaption a{font-size:.8rem;color:var(--soft);text-decoration:none;white-space:nowrap}
+.slide figcaption a:hover{color:var(--accent-ink)}
+.vid-badge{position:absolute;top:12px;left:12px;background:rgba(20,27,22,.7);color:#F5EEDF;font-size:.72rem;padding:.3em .7em;border-radius:999px;display:flex;gap:.4em;align-items:center;font-weight:500}
+.vid-badge svg{width:10px;height:10px}
+.gal-progress{height:2px;background:var(--line);border-radius:2px;margin-top:6px;overflow:hidden}
+.gal-progress i{display:block;height:100%;width:20%;background:var(--accent);transform-origin:left}
+
+/* jardín: vegano + pet */
+.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.panel{border-radius:28px;padding:clamp(26px,4vw,44px);display:grid;gap:18px;align-content:start;position:relative;overflow:hidden;min-width:0}
+.panel h3{font-size:clamp(1.9rem,3.6vw,2.7rem)}
+.panel .kicker{font-size:1.35rem}
+.panel-green{background:var(--band);color:var(--band-text)}
+.panel-green h3{color:var(--band-text)}
+.panel-green .kicker{color:var(--accent)}
+.panel-green p{color:var(--band-soft)}
+.panel-rose{background:var(--accent-soft);color:var(--text)}
+.panel-rose p{color:var(--soft)}
+.legend{display:flex;flex-wrap:wrap;gap:12px}
+.legend div{display:flex;align-items:baseline;gap:8px}
+.legend b{font-family:var(--f-title);font-size:2.6rem;font-weight:500;line-height:1;color:var(--band-text)}
+.legend span{font-size:.9rem;color:var(--band-soft);max-width:14ch;line-height:1.3}
+.panel-green .btn{background:var(--marfil);color:#26382B;justify-self:start}
+.panel-rose .btn{justify-self:start}
+.panel .mk-flor{position:absolute;right:-50px;bottom:-30px;width:260px;opacity:.13;--logo:currentColor}
+.paws{display:flex;gap:10px;color:var(--accent-ink)}
+.paws svg{width:28px;height:28px}
+.pet-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.pet-list li{display:flex;gap:10px;align-items:flex-start}
+.pet-list li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent);margin-top:.6em;flex:none}
+@media(max-width:860px){.duo{grid-template-columns:1fr}}
+
+/* fidelización: club digital */
+.steps-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.steps{list-style:none;margin:0 0 clamp(28px,4vw,40px);padding:0;counter-reset:s}
+.steps li{display:grid;grid-template-columns:40px 1fr;gap:14px;align-items:start}
+.steps li::before{counter-increment:s;content:counter(s);width:40px;height:40px;border-radius:50%;border:1.5px solid var(--accent);display:grid;place-items:center;font-family:var(--f-title);color:var(--accent-ink)}
+.steps b{display:block;font-family:var(--f-title);font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--heading)}
+.steps span{color:var(--soft);font-size:.95rem}
+.demo-note{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--soft);background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:12px 16px;margin-bottom:20px}
+.demo-note b{color:var(--heading);font-weight:700}
+.club-demo{display:grid;grid-template-columns:minmax(0,400px) minmax(0,1fr);gap:20px;align-items:start}
+.club-demo.solo{grid-template-columns:minmax(0,440px);justify-content:center}
+.club-demo.solo-staff{grid-template-columns:minmax(0,760px);justify-content:center}
+.btn[aria-busy="true"]{opacity:.6;pointer-events:none}
+.pane-title{display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:var(--f-title);text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;color:var(--soft);margin-bottom:12px}
+.pane-title i{font-style:normal;background:var(--accent-soft);color:var(--accent-ink);padding:.25em .7em;border-radius:999px;letter-spacing:.06em}
+.phone{background:var(--surface);border:1.5px solid var(--line);border-radius:36px;padding:16px;box-shadow:var(--shadow);min-width:0}
+.phone-inner{background:var(--bg);border-radius:24px;padding:18px;display:grid;gap:16px;min-height:460px;align-content:start}
+.staff{background:var(--surface);border:1.5px solid var(--line);border-radius:24px;padding:clamp(16px,2.4vw,24px);display:grid;gap:16px;min-width:0;align-content:start}
+.f{display:grid;gap:10px}
+.f label{font-size:.82rem;color:var(--soft);display:grid;gap:5px}
+.f input{font:inherit;font-size:1rem;padding:.8em 1em;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--text);width:100%}
+.f input:focus{outline:none;border-color:var(--accent)}
+.f .btn{justify-content:center}
+.f .err{color:var(--accent-ink);font-size:.86rem;min-height:1.2em}
+.f .check{display:flex;gap:8px;align-items:flex-start;font-size:.82rem}
+.f .check input{width:auto;margin-top:.2em}
+.linkbtn{background:none;border:0;padding:0;font:inherit;font-size:.9rem;color:var(--accent-ink);text-decoration:underline;cursor:pointer;justify-self:start}
+.ptitle{font-family:var(--f-title);text-transform:uppercase;letter-spacing:.04em;font-size:1.5rem;color:var(--heading);line-height:1.1}
+.psub{color:var(--soft);font-size:.92rem}
+.card{background:var(--band);color:var(--band-text);border-radius:20px;padding:18px;position:relative;overflow:hidden;display:grid;gap:14px;width:100%;--logo:var(--marfil);box-shadow:var(--shadow)}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.card-top .mk-word{width:120px}
+.card-top small{font-family:var(--f-serif);font-style:italic;font-size:1.1rem;color:var(--accent);text-align:right;line-height:1.1}
+.card-name{font-family:var(--f-title);text-transform:uppercase;letter-spacing:.08em;font-size:1rem}
+.stamps{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.stamp{aspect-ratio:1;border-radius:50%;border:1.5px dashed rgba(245,238,223,.45);display:grid;place-items:center;position:relative}
+.stamp .mk-flor{width:72%;opacity:0;transform:scale(.4);transition:opacity .3s,transform .3s}
+.stamp.on{border-style:solid;border-color:var(--accent);background:rgba(201,137,131,.18)}
+.stamp.on .mk-flor{opacity:1;transform:none}
+.stamp.gift{border-color:var(--accent)}
+.stamp.gift::after{content:"GRATIS";font-family:var(--f-title);font-size:.56rem;letter-spacing:.08em;color:var(--accent);position:absolute}
+.stamp.gift.ready{background:var(--accent)}
+.stamp.gift.ready::after{color:#2A1C1A}
+.card-foot{display:flex;justify-content:space-between;align-items:end;gap:10px;font-size:.8rem;color:var(--band-soft)}
+.card-foot b{font-family:var(--f-title);font-weight:500;letter-spacing:.1em;color:var(--band-text)}
+.code{display:grid;gap:4px;justify-items:center;text-align:center;padding:14px;border:1.5px dashed var(--line);border-radius:16px}
+.code span{font-size:.8rem;color:var(--soft)}
+.code b{font-family:var(--f-title);font-weight:500;font-size:2rem;letter-spacing:.14em;color:var(--heading);font-variant-numeric:tabular-nums}
+.cmsg{font-family:var(--f-serif);font-style:italic;font-size:1.2rem;color:var(--accent-ink);line-height:1.25}
+.hist{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.86rem;color:var(--soft)}
+.hist li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding-bottom:6px}
+.hist li b{color:var(--heading);font-weight:500}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{background:var(--bg);border-radius:14px;padding:12px 14px;display:grid;gap:2px}
+.stat b{font-family:var(--f-title);font-size:1.8rem;font-weight:500;color:var(--heading);line-height:1;font-variant-numeric:tabular-nums}
+.stat span{font-size:.78rem;color:var(--soft);line-height:1.25}
+.clist{list-style:none;margin:0;padding:0;display:grid;gap:6px;max-height:230px;overflow:auto}
+.clist button{width:100%;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;text-align:left;font:inherit;padding:10px 12px;border-radius:12px;border:1.5px solid transparent;background:var(--bg);color:var(--text);cursor:pointer}
+.clist button[aria-pressed="true"]{border-color:var(--accent)}
+.clist small{display:block;color:var(--soft);font-size:.8rem}
+.mini{display:flex;gap:3px}
+.mini i{width:8px;height:8px;border-radius:50%;background:var(--line)}
+.mini i.on{background:var(--accent)}
+.detail{background:var(--bg);border-radius:16px;padding:16px;display:grid;gap:12px}
+.detail-head{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}
+.detail-head b{font-family:var(--f-title);text-transform:uppercase;letter-spacing:.05em;font-size:1.2rem;color:var(--heading)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .4s ease}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.actions .btn{padding:.8em 1.2em;font-size:.82rem}
+.btn[disabled]{opacity:.4;cursor:not-allowed;transform:none}
+.toast{font-size:.9rem;color:var(--leaf);min-height:1.3em}
+@media(max-width:900px){.club-demo{grid-template-columns:1fr}.phone{max-width:420px;width:100%;margin-inline:auto}.steps-row{grid-template-columns:1fr}}
+@media(max-width:480px){.stats{grid-template-columns:1fr 1fr 1fr}.stat b{font-size:1.4rem}}
+.promo{margin-top:clamp(32px,5vw,56px);display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:20px;align-items:center;padding:22px 26px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface)}
+.promo .pct{font-family:var(--f-title);font-size:clamp(2.6rem,5vw,3.4rem);line-height:1;color:var(--accent-ink)}
+.promo h3{font-size:1.25rem;margin-bottom:4px}
+.promo p{color:var(--soft);font-size:.95rem}
+.promo .label{color:var(--soft)}
+@media(max-width:860px){.promo{grid-template-columns:1fr}}
+
+/* reseñas */
+.quotes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.quote{margin:0;padding:26px;border-top:2px solid var(--accent);display:grid;gap:14px;align-content:start}
+.quote p{font-family:var(--f-serif);font-style:italic;font-size:1.45rem;line-height:1.3;color:var(--heading)}
+.quote cite{font-style:normal;font-size:.85rem;color:var(--soft)}
+.rating{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.rating b{font-family:var(--f-title);font-size:3.4rem;font-weight:500;line-height:1;color:var(--heading)}
+.rating span{color:var(--soft)}
+@media(max-width:860px){.quotes{grid-template-columns:1fr}.quote{padding:20px 0 0}}
+
+/* visítanos */
+.visit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:stretch}
+.visit-photo{position:relative;min-height:420px}
+.visit-photo .arch{position:absolute;inset:0}
+.pin{position:absolute;left:18px;right:18px;bottom:18px;background:var(--surface);border-radius:16px;padding:16px 18px;display:flex;gap:14px;align-items:center;box-shadow:var(--shadow)}
+.pin svg{width:28px;height:28px;color:var(--accent-ink);flex:none}
+.pin b{display:block;font-family:var(--f-title);font-weight:500;text-transform:uppercase;letter-spacing:.05em;color:var(--heading)}
+.pin span{font-size:.9rem;color:var(--soft)}
+.visit-info{display:grid;gap:26px;align-content:start;min-width:0}
+.hours{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.hours li{display:flex;justify-content:space-between;gap:16px;padding:14px 4px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.hours li b{font-family:var(--f-title);font-weight:500;text-transform:uppercase;letter-spacing:.06em;color:var(--heading)}
+.hours li.today{background:var(--surface);padding-inline:14px;border-radius:10px}
+.hours li.today b::after{content:"hoy";font-family:var(--f-body);text-transform:none;letter-spacing:0;font-size:.72rem;font-weight:700;background:var(--accent);color:#2A1C1A;border-radius:999px;padding:.15em .6em;margin-left:.6em;vertical-align:middle}
+.services{display:flex;flex-wrap:wrap;gap:8px}
+.visit-cta{display:flex;flex-wrap:wrap;gap:10px}
+@media(max-width:860px){.visit{grid-template-columns:1fr}.visit-photo{min-height:380px}}
+
+/* redes */
+.social{background:var(--band);color:var(--band-text)}
+.social .sec-head h2{color:var(--band-text)}
+.social .sec-head p{color:var(--band-soft)}
+.social .kicker{color:var(--accent)}
+.soc-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px}
+.ig{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ig a{aspect-ratio:1;overflow:hidden;border-radius:12px;display:block;position:relative}
+.ig img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.ig a:hover img{transform:scale(1.06)}
+.soc-cards{display:grid;gap:14px;align-content:start}
+.soc{display:grid;grid-template-columns:48px 1fr auto;gap:14px;align-items:center;padding:18px;border-radius:var(--r);background:var(--band-2);text-decoration:none;color:var(--band-text);border:1px solid rgba(245,238,223,.12)}
+.soc:hover{border-color:var(--accent)}
+.soc .ico{width:48px;height:48px;border-radius:14px;background:rgba(245,238,223,.08);display:grid;place-items:center}
+.soc .ico svg{width:24px;height:24px}
+.soc b{display:block;font-family:var(--f-title);font-weight:500;letter-spacing:.06em;text-transform:uppercase}
+.soc span{font-size:.88rem;color:var(--band-soft)}
+.soc .arrow{width:18px;height:18px;color:var(--accent)}
+.copy-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:.9rem;color:var(--band-soft)}
+.copy-row code{font-family:var(--f-title);font-size:1.05rem;letter-spacing:.06em;color:var(--band-text);user-select:all}
+.copy-row button{font:inherit;font-size:.82rem;color:var(--band-text);background:none;border:1px solid rgba(245,238,223,.3);border-radius:999px;padding:.35em .9em;cursor:pointer}
+@media(max-width:860px){.soc-grid{grid-template-columns:1fr}}
+
+/* footer */
+.foot{background:var(--band-2);color:var(--band-soft);padding-block:56px 40px;--logo:var(--marfil)}
+.foot .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center}
+.foot .mk-logo{width:150px}
+.foot p{font-size:.92rem}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+.foot nav a{font-family:var(--f-title);text-transform:uppercase;letter-spacing:.1em;font-size:.8rem;text-decoration:none;color:var(--band-text)}
+.foot .fine{grid-column:1/-1;border-top:1px solid rgba(245,238,223,.12);padding-top:20px;font-size:.8rem;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.credit{display:inline-flex;align-items:center;gap:10px}
+.fluva{display:inline-flex;background:#F5EEDF;border-radius:10px;padding:6px 10px}
+.fluva img{width:104px;height:auto}
+@media(max-width:760px){.foot .wrap{grid-template-columns:1fr}.foot .mk-logo{width:120px}}
+
+/* whatsapp flotante */
+.wa-float{position:fixed;right:calc(18px + env(safe-area-inset-right,0px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:55;width:60px;height:60px;border-radius:50%;background:#2F7D4F;color:#fff;display:grid;place-items:center;box-shadow:0 12px 30px -10px rgba(0,0,0,.5);text-decoration:none;transition:transform .25s}
+.wa-float:hover{transform:scale(1.07)}
+.wa-float svg{width:30px;height:30px}
+
+
+/* mapa ilustrado */
+.mapwrap{margin-top:clamp(28px,4vw,44px)}
+.mapcard{position:relative;border-radius:28px;overflow:hidden;background:var(--map-bg);border:1px solid var(--line)}
+.mapscroll{overflow-x:auto;scrollbar-width:none}
+.mapscroll::-webkit-scrollbar{display:none}
+.mapcard svg{display:block;width:100%;min-width:640px;height:auto}
+.m-blocks{fill:url(#mgrid)}
+.m-park{fill:var(--map-park);stroke:none}
+.m-st{fill:none;stroke:var(--map-street);stroke-linecap:round;stroke-linejoin:round}
+.m-st.main{stroke:var(--map-main);stroke-width:13}
+.m-st.mid{stroke-width:8}
+.m-st.min{stroke-width:4;opacity:.7}
+.m-lbl{font-family:var(--f-title);text-transform:uppercase;letter-spacing:.14em;font-size:12.5px;fill:var(--map-text)}
+.m-lbl.big{font-size:14px;fill:var(--heading);letter-spacing:.16em}
+.m-lm{font-family:var(--f-serif);font-style:italic;font-size:19px;fill:var(--map-text)}
+.m-zone{fill:var(--accent);fill-opacity:.1;stroke:var(--accent);stroke-width:1.6;stroke-dasharray:3 7;stroke-linecap:round}
+.m-route{fill:none;stroke:var(--accent);stroke-width:2.5;stroke-dasharray:1 8;stroke-linecap:round}
+.m-pin{fill:var(--accent)}
+.m-pin-in{fill:var(--map-bg)}
+.m-pulse{fill:none;stroke:var(--accent);stroke-width:2}
+.m-name{font-family:var(--f-title);font-size:30px;letter-spacing:.06em;fill:var(--accent);text-transform:uppercase;font-weight:500}
+.m-sub{font-family:var(--f-body);font-size:15px;fill:var(--text)}
+.m-nlabel{fill:var(--map-bg);fill-opacity:.85}
+.mapcap{position:absolute;left:18px;bottom:18px;right:18px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;pointer-events:none}
+.mapcap>*{pointer-events:auto}
+.mapcap .label{background:var(--surface);color:var(--soft);padding:.55em 1em;border-radius:999px;border:1px solid var(--line)}
+.mapcap .btn{box-shadow:var(--shadow)}
+@media(max-width:640px){.mapcap .label{display:none}.mapcap{justify-content:flex-end}}
+@media (prefers-reduced-motion:no-preference){.m-pulse{animation:mpulse 2.6s ease-out infinite;transform-origin:512px 282px;transform-box:view-box}}
+@keyframes mpulse{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.6);opacity:0}}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#inicio" aria-label="Cafetería Magnolias, inicio">
+      <span class="mk mk-flor" aria-hidden="true"></span>
+      <span class="mk mk-word" aria-hidden="true"></span>
+    </a>
+    <nav class="nav" id="nav" aria-label="Secciones">
+      <a href="#cartas">Cartas</a>
+      <a href="#galeria">Galería</a>
+      <a href="#jardin">Vegano &amp; pet</a>
+      <a href="#club">Club</a>
+      <a href="#visitanos">Visítanos</a>
+    </nav>
+    <a class="btn btn-primary wa-link" href="#" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3Z"/></svg>Anticipa tu pedido</a>
+    <button class="mode-btn" id="modeBtn" aria-label="Cambiar a modo claro" title="Modo claro / oscuro"><svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg></button>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="hero">
+    <span class="mk mk-flor hero-flor" aria-hidden="true"></span>
+    <div class="wrap">
+      <div class="hero-copy">
+        <h1 class="h-a">Café de especialidad <em>en el corazón de</em> Casablanca</h1>
+        <p class="hero-lead h-a">Que nunca te falte un café. Espresso, capuccino, matcha o un mocktail de café de especialidad, y mejor aún si lo acompañas con una sartén de huevo con masa madre, unas tostadas francesas o un trozo de pie de limón. Ven con tu perrito: aquí también es bienvenido.</p>
+        <div class="hero-cta h-a">
+          <a class="btn btn-primary" href="#cartas">Ver las cartas</a>
+          <a class="btn btn-ghost wa-link" href="#" target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        </div>
+        <div class="facts h-a">
+          <span class="status" id="status"><i></i><span>Horario de hoy</span></span>
+          <span><span class="stars" aria-hidden="true">★★★★★</span> 4,9 en Google · 38 reseñas</span>
+        </div>
+        <div class="chips h-a">
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 6-13 15-14-1 9-6 15-14 15"/><path d="M5 19 13 11"/></svg>Opciones veganas</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M8.5 12.5 11 15l4.5-5"/></svg>Vegetariano</span>
+          <span class="chip"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><ellipse cx="6.5" cy="10" rx="2" ry="2.6"/><ellipse cx="10" cy="6.2" rx="2" ry="2.6"/><ellipse cx="14.2" cy="6.2" rx="2" ry="2.6"/><ellipse cx="17.6" cy="10" rx="2" ry="2.6"/><path d="M12 11.5c-2.6 0-5.3 3.4-5.3 5.6 0 1.7 1.3 2.4 2.6 2.4 1.1 0 1.7-.6 2.7-.6s1.6.6 2.7.6c1.3 0 2.6-.7 2.6-2.4 0-2.2-2.7-5.6-5.3-5.6Z"/></svg>Pet friendly</span>
+        </div>
+      </div>
+      <div class="hero-media">
+        <span class="ring" aria-hidden="true"></span>
+        <div class="arch" id="heroArch">
+          <video src="media/v-pour1.mp4" poster="media/v-pour1.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Video: barista de Cafetería Magnolias sirviendo café con leche en tazas"></video>
+        </div>
+        <div class="hero-badge">
+          <b>Recién servido</b>
+          <span>Café de especialidad · espresso desde $2.000</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon" aria-hidden="true">
+    <div class="ribbon-track" id="ribbon"></div>
+  </div>
+
+  <!-- CARTAS -->
+  <section class="sec" id="cartas">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker left">Nuestras cartas</p>
+        <h2>Las dos cartas de Magnolias</h2>
+        <p>La carta Magnolias 2026 para desayunar, almorzar algo rico o pasar la tarde con un café. Y la carta de pastelería familiar, con tortas enteras para encargar.</p>
+      </div>
+
+      <div class="cartas-switch" role="tablist" aria-label="Elegir carta">
+        <button class="cs-btn" role="tab" id="tab-carta" aria-controls="panel-carta" aria-selected="true"><b>Carta Magnolias 2026</b><span>Cafetería, desayunos y cocina</span></button>
+        <button class="cs-btn" role="tab" id="tab-pas" aria-controls="panel-pas" aria-selected="false"><b>Pastelería familiar</b><span>Tortas y queques para compartir</span></button>
+      </div>
+
+      <div id="panel-carta" role="tabpanel" aria-labelledby="tab-carta">
+        <div class="carta">
+          <div class="carta-photo">
+            <div class="arch" id="catFrame"><video id="catVid" src="media/v-sarten.mp4" poster="media/v-sarten.jpg" autoplay muted loop playsinline preload="metadata" aria-label="Video: sartén de huevo con palta y tocino"></video><img id="catImg" src="media/sarten.jpg" alt="" loading="lazy" hidden></div>
+            <small id="catCaption">Fotos reales de @cafemagnolias</small>
+          </div>
+          <div class="carta-body">
+            <div class="cats" id="cats" role="tablist" aria-label="Categorías de la carta"></div>
+            <div class="filters" id="filters">
+              <span>Mostrar:</span>
+              <button id="f-vegan" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 6-13 15-14-1 9-6 15-14 15"/><path d="M5 19 13 11"/></svg>Solo vegano</button>
+              <button id="f-veg" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M8.5 12.5 11 15l4.5-5"/></svg>Sin carne</button>
+            </div>
+            <div id="catContent" aria-live="polite"></div>
+            <div class="carta-foot">
+              <span>Leche sin lactosa o vegetal: + $800</span>
+              <a href="https://drive.google.com/file/d/1TQCMtvpC7ylSpLPWaIb3JPESjDYqDVBX/view" target="_blank" rel="noopener">Ver carta original en PDF ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="panel-pas" role="tabpanel" aria-labelledby="tab-pas" hidden>
+        <div class="pas">
+          <div class="pas-photos">
+            <figure><div class="arch"><img src="media/pie.jpg" alt="Pie de limón con merengue suizo" loading="lazy"></div><figcaption>Pie de limón</figcaption></figure>
+            <figure><div class="arch"><img src="media/carrot.jpg" alt="Carrot cake vegano con naranja y nueces" loading="lazy"></div><figcaption>Carrot cake vegano</figcaption></figure>
+          </div>
+          <div class="pas-lists">
+            <div class="pas-group">
+              <h3>Pastelería tradicional</h3>
+              <ul class="items" id="pasTrad"></ul>
+            </div>
+            <div class="pas-group">
+              <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 6-13 15-14-1 9-6 15-14 15"/><path d="M5 19 13 11"/></svg>Pastelería vegana</h3>
+              <ul class="items" id="pasVeg"></ul>
+            </div>
+            <div class="pas-note">
+              <p>Las tortas enteras se encargan con anticipación. Escríbenos por WhatsApp con el día que la necesitas.</p>
+              <a class="btn btn-rose" id="waTorta" href="#" target="_blank" rel="noopener">Encargar torta</a>
+            </div>
+            <a href="https://drive.google.com/file/d/1NdjWWfM2l6HEaK7MAxt8hidM1KVMup3l/view" target="_blank" rel="noopener" style="color:var(--accent-ink);font-size:.92rem">Ver carta de pastelería en PDF ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERÍA -->
+  <section class="sec gal-sec" id="galeria">
+    <div class="wrap gal-head">
+      <div class="sec-head" style="margin-bottom:0">
+        <p class="kicker left">Fotos y videos</p>
+        <h2>Así se vive Magnolias</h2>
+        <p>Desayunos, mocktails, tortas y la terraza. Desliza o usa las flechas.</p>
+      </div>
+      <div class="gal-ctrl">
+        <button class="round" id="galPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        <button class="round" id="galNext" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
+    <div class="gallery" id="gallery" tabindex="0" aria-label="Carrusel de fotos y videos" style="margin-top:28px"></div>
+    <div class="wrap"><div class="gal-progress"><i id="galBar"></i></div></div>
+  </section>
+
+  <!-- VEGANO + PET -->
+  <section class="sec" id="jardin">
+    <div class="wrap">
+      <div class="duo">
+        <article class="panel panel-green">
+          <span class="mk mk-flor" aria-hidden="true"></span>
+          <p class="kicker left">Cocina para todos</p>
+          <h3>Tradicional, vegetariana y vegana</h3>
+          <p>Smoothies con leche vegetal, el sándwich Om-Ñam vegano, carrot cake con crema de castañas de cajú y un snicker crudivegano. Cualquier café se prepara con leche vegetal.</p>
+          <div class="legend">
+            <div><b id="nVegan">0</b><span>opciones veganas en las cartas</span></div>
+            <div><b id="nVeg">0</b><span>platos y postres sin carne</span></div>
+          </div>
+          <button class="btn" id="goVegan">Ver opciones veganas</button>
+        </article>
+        <article class="panel panel-rose">
+          <div class="paws" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="currentColor"><ellipse cx="6.5" cy="10" rx="2" ry="2.6"/><ellipse cx="10" cy="6.2" rx="2" ry="2.6"/><ellipse cx="14.2" cy="6.2" rx="2" ry="2.6"/><ellipse cx="17.6" cy="10" rx="2" ry="2.6"/><path d="M12 11.5c-2.6 0-5.3 3.4-5.3 5.6 0 1.7 1.3 2.4 2.6 2.4 1.1 0 1.7-.6 2.7-.6s1.6.6 2.7.6c1.3 0 2.6-.7 2.6-2.4 0-2.2-2.7-5.6-5.3-5.6Z"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" style="transform:rotate(18deg) translateY(6px);opacity:.7"><ellipse cx="6.5" cy="10" rx="2" ry="2.6"/><ellipse cx="10" cy="6.2" rx="2" ry="2.6"/><ellipse cx="14.2" cy="6.2" rx="2" ry="2.6"/><ellipse cx="17.6" cy="10" rx="2" ry="2.6"/><path d="M12 11.5c-2.6 0-5.3 3.4-5.3 5.6 0 1.7 1.3 2.4 2.6 2.4 1.1 0 1.7-.6 2.7-.6s1.6.6 2.7.6c1.3 0 2.6-.7 2.6-2.4 0-2.2-2.7-5.6-5.3-5.6Z"/></svg>
+          </div>
+          <p class="kicker left">Pet friendly</p>
+          <h3>Tu perrito también viene al café</h3>
+          <p>En Magnolias las mascotas son bienvenidas. Trae a tu compañero, elige mesa en la terraza y quédate el tiempo que quieras.</p>
+          <ul class="pet-list">
+            <li>Terraza al aire libre en Av. Constitución</li>
+            <li>Babyccino para los más pequeños de la familia</li>
+            <li>Ideal para la pausa del paseo por Casablanca</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLUB / FIDELIZACIÓN -->
+  <section class="sec" id="club" style="padding-top:0">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker left">Club Magnolias</p>
+        <h2>Junta 9 sellos, el 10º café va por la casa</h2>
+        <p>Una tarjeta digital en tu celular. Te inscribes una vez con tu número, muestras tu código en caja y sumamos tu sello. Sin tarjetas de cartón que se pierden.</p>
+      </div>
+      <ol class="steps steps-row">
+        <li><div><b>Inscríbete con tu celular</b><span>Solo tu nombre y tu número. Toma menos de un minuto.</span></div></li>
+        <li><div><b>Muestra tu código en caja</b><span>Un sello por cada café, té o mocktail.</span></div></li>
+        <li><div><b>Tu 10º café es gratis</b><span>Con 9 sellos, el barista canjea tu café de regalo.</span></div></li>
+      </ol>
+      <p class="demo-note" id="clubNote"><span><b>Pruébalo aquí.</b> Aquí ves la tarjeta como la vería un cliente en su celular y, al lado, el panel del barista en caja. Suma un sello en el panel y mira cómo aparece en la tarjeta. Es una demostración: los datos se guardan solo en este navegador y los clientes marcados “ejemplo” son ficticios.</span></p>
+      <div class="club-demo" id="clubGrid">
+        <div id="paneCli">
+          <div class="pane-title"><span>Vista del cliente</span><i>Celular</i></div>
+          <div class="phone"><div class="phone-inner" id="cliView" aria-live="polite"></div></div>
+        </div>
+        <div id="paneStaff">
+          <div class="pane-title"><span>Panel del barista</span><i>Caja · tablet</i></div>
+          <div class="staff" id="staffView"></div>
+        </div>
+      </div>
+
+      <div class="promo">
+        <span class="pct">15%</span>
+        <div>
+          <p class="label">Beneficio · Issi Sport</p>
+          <h3>¿Entrenas en Issi Sport?</h3>
+          <p>15% de descuento en compras sobre $20.000 mostrando tu aplicación de alumno activo.</p>
+        </div>
+        <a class="btn btn-ghost" href="https://www.instagram.com/stories/highlights/18135873139656139/" target="_blank" rel="noopener">Ver en Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEÑAS -->
+  <section class="sec" style="padding-top:0">
+    <div class="wrap">
+      <div class="rating">
+        <b>4,9</b>
+        <div><div class="stars" aria-label="5 estrellas">★★★★★</div><span>Promedio de 38 reseñas en Google Maps</span></div>
+      </div>
+      <div class="quotes">
+        <figure class="quote"><p>“Ambiente muy agradable, la comida muy rica y el café delicioso.”</p><cite>Reseña en Google</cite></figure>
+        <figure class="quote"><p>“Sándwich vegano, snicker vegano y té chai: todo delicioso y fresco.”</p><cite>Reseña en Google</cite></figure>
+        <figure class="quote"><p>“Los desayunos son muy buenos y con precios convenientes.”</p><cite>Reseña en Google</cite></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISÍTANOS -->
+  <section class="sec gal-sec" id="visitanos">
+    <div class="wrap visit">
+      <div class="visit-photo">
+        <div class="arch"><img src="media/fachada.jpg" alt="Fachada de Cafetería Magnolias al atardecer, con la terraza y el letrero iluminado" loading="lazy"></div>
+        <div class="pin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          <div><b>Av. Constitución 412</b><span>Casablanca, Región de Valparaíso</span></div>
+        </div>
+      </div>
+      <div class="visit-info">
+        <div class="sec-head" style="margin-bottom:0">
+          <p class="kicker left">Visítanos</p>
+          <h2>Te esperamos en Casablanca</h2>
+        </div>
+        <ul class="hours" id="hours">
+          <li data-d="1,2"><b>Lunes y martes</b><span>07:00 – 17:00</span></li>
+          <li data-d="3,4,5"><b>Miércoles a viernes</b><span>07:00 – 20:00</span></li>
+          <li data-d="6"><b>Sábado</b><span>09:00 – 13:00</span></li>
+          <li data-d="0"><b>Domingo</b><span>Cerrado</span></li>
+        </ul>
+        <div class="services">
+          <span class="chip">Consumo en el local</span>
+          <span class="chip">Para llevar</span>
+          <span class="chip">Pedidos anticipados por WhatsApp</span>
+        </div>
+        <div class="visit-cta">
+          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=-33.3169459,-71.4085765" target="_blank" rel="noopener">Cómo llegar</a>
+          <a class="btn btn-ghost" href="https://www.google.com/maps/place/Caf%C3%A9+Magnolias/@-33.3169459,-71.4085765,17z" target="_blank" rel="noopener">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap mapwrap">
+      <div class="mapcard">
+        <div class="mapscroll">
+        <svg viewBox="0 0 972 625" role="img" aria-label="Mapa ilustrado del centro de Casablanca. Cafetería Magnolias está en Av. Constitución 412, entre Pasaje Chapito y Buin, frente al Estadio Municipal y cerca de la Plaza Gabriela Mistral.">
+          <defs>
+            <pattern id="mgrid" width="26" height="22" patternUnits="userSpaceOnUse" patternTransform="rotate(36)">
+              <rect x="3" y="3" width="18" height="14" rx="2" style="fill:var(--map-block)"/>
+            </pattern>
+          </defs>
+          <rect class="m-blocks" x="0" y="0" width="972" height="625"/>
+          <!-- parques -->
+          <path class="m-park" d="M52 272 L330 196 L418 300 L352 468 L258 432 L210 520 L150 452 L120 420 Z"/>
+          <rect class="m-park" x="632" y="186" width="118" height="62" rx="10" transform="rotate(-6 690 217)"/>
+          <!-- calles secundarias -->
+          <g class="m-st min">
+            <path d="M560 360 L960 625"/><path d="M600 90 L972 340"/><path d="M640 20 L972 250"/>
+            <path d="M720 625 L900 300"/><path d="M880 625 L972 470"/><path d="M560 625 L700 380"/>
+            <path d="M0 330 L60 300"/><path d="M60 600 L180 520"/><path d="M820 0 L972 120"/>
+            <path d="M380 40 L460 30"/><path d="M520 70 L620 40"/><path d="M0 120 L200 70"/>
+          </g>
+          <!-- calles medianas -->
+          <g class="m-st mid">
+            <path d="M0 215 L330 143"/>
+            <path d="M492 160 L700 300 L880 440 L972 512"/>
+            <path d="M500 310 L700 450 L830 560 L900 625"/>
+            <path d="M420 470 L650 610"/>
+            <path d="M610 420 L520 625"/>
+            <path d="M650 570 L800 318 L860 230"/>
+            <path d="M600 215 L765 0"/>
+            <path d="M792 245 L885 115"/>
+            <path d="M840 600 L972 478"/>
+            <path d="M190 555 L372 612"/>
+            <path d="M630 60 L700 0"/>
+          </g>
+          <!-- avenidas -->
+          <g class="m-st main">
+            <path d="M190 0 L492 300"/>
+            <path d="M468 0 L492 300 L438 430 L372 625"/>
+          </g>
+          <!-- nombres de calles -->
+          <text class="m-lbl big" transform="translate(452 100) rotate(86)">Av. Constitución</text>
+          <text class="m-lbl big" transform="translate(398 560) rotate(-69)">Av. Constitución</text>
+          <text class="m-lbl" transform="translate(255 72) rotate(46)">Av. Alejandro Galaz</text>
+          <text class="m-lbl" transform="translate(40 196) rotate(-12.8)">Eladio Lazcano</text>
+          <text class="m-lbl" transform="translate(812 386) rotate(37)">Pje. Chapito</text>
+          <text class="m-lbl" transform="translate(690 432) rotate(36)">Buin</text>
+          <text class="m-lbl" transform="translate(470 488) rotate(31)">Yungay</text>
+          <text class="m-lbl" transform="translate(556 600) rotate(-67)">Gral. O. Bonilla</text>
+          <text class="m-lbl" transform="translate(690 520) rotate(-59)">C. Membrillar</text>
+          <text class="m-lbl" transform="translate(660 160) rotate(-52.5)">C. Caupolicán</text>
+          <text class="m-lbl" transform="translate(818 210) rotate(-55)">Las Rosas</text>
+          <text class="m-lbl" transform="translate(872 578) rotate(-42)">Chacabuco</text>
+          <text class="m-lbl" transform="translate(220 552) rotate(17.5)">Av. Punta Arenas</text>
+          <!-- hitos -->
+          <text class="m-lm" x="150" y="330">Estadio Municipal</text>
+          <text class="m-lm" x="640" y="276">Plaza Gabriela Mistral</text>
+          <!-- zona Magnolias -->
+          <circle class="m-zone" cx="512" cy="282" r="118"/>
+          <circle class="m-pulse" cx="512" cy="282" r="22"/>
+          <circle class="m-pin" cx="512" cy="282" r="22"/>
+          <circle class="m-pin-in" cx="512" cy="282" r="8.5"/>
+          <rect class="m-nlabel" x="548" y="300" width="246" height="70" rx="12"/>
+          <text class="m-name" x="560" y="334">Magnolias</text>
+          <text class="m-sub" x="561" y="357">Av. Constitución 412</text>
+        </svg>
+        </div>
+        <div class="mapcap">
+          <span class="label">Centro de Casablanca · Región de Valparaíso</span>
+          <a class="btn btn-primary" href="https://www.google.com/maps/dir/?api=1&amp;destination=-33.3169459,-71.4085765" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REDES -->
+  <section class="sec social" id="redes">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="kicker left">Redes sociales</p>
+        <h2>Síguenos en redes</h2>
+        <p>Novedades de la carta, tortas del día y lo que pasa en el café, todos los días en Instagram.</p>
+      </div>
+      <div class="soc-grid">
+        <div class="ig" id="igGrid"></div>
+        <div class="soc-cards">
+          <a class="soc" href="https://www.instagram.com/cafemagnolias/" target="_blank" rel="noopener">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></span>
+            <div><b>@cafemagnolias</b><span>Más de 4.100 seguidores en Instagram</span></div>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+          <a class="soc wa-link" href="#" target="_blank" rel="noopener">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3Z"/></svg></span>
+            <div><b>WhatsApp</b><span>Anticipa tu pedido y retíralo listo</span></div>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+          <div class="copy-row"><span>Número:</span><code id="waNum">+56 9 5360 8396</code><button id="copyWa">Copiar</button></div>
+          <a class="soc" href="https://www.google.com/maps/place/Caf%C3%A9+Magnolias/@-33.3169459,-71.4085765,17z" target="_blank" rel="noopener">
+            <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6 .7-4.5 4.1 1.2 6L12 16.4 6.7 19.4l1.2-6L3.4 9.3l6-.7Z"/></svg></span>
+            <div><b>Google</b><span>Déjanos tu reseña · 4,9 ★</span></div>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span class="mk mk-logo" role="img" aria-label="Cafetería Magnolias"></span>
+    <div style="display:grid;gap:8px">
+      <p>Cafetería de especialidad · Cocina tradicional, vegetariana y vegana · Pet friendly</p>
+      <p>Av. Constitución 412, Casablanca, Chile</p>
+    </div>
+    <nav aria-label="Pie de página"><a href="#cartas">Cartas</a><a href="#galeria">Galería</a><a href="#club">Club</a><a href="#visitanos">Visítanos</a></nav>
+    <div class="fine"><span>© 2026 Cafetería Magnolias</span><span>Precios en pesos chilenos según carta 2026</span><span class="credit">Sitio creado por <span class="fluva"><img src="media/fluva.png" alt="fluva, tecnología que fluye contigo" width="104" height="37"></span></span></div>
+  </div>
+</footer>
+
+<a class="wa-float wa-link" href="#" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3Z"/></svg></a>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+const WA='56953608396';
+const wa=(msg)=>'https://wa.me/'+WA+(msg?'?text='+encodeURIComponent(msg):'');
+document.querySelectorAll('.wa-link').forEach(a=>a.href=wa('¡Hola Magnolias! Quiero anticipar un pedido: '));
+document.getElementById('waTorta').href=wa('¡Hola Magnolias! Quiero encargar una torta de la pastelería familiar: ');
+
+/* ---------- DATOS DE LA CARTA (Carta Magnolias 2026) ---------- */
+const V='vegan', G='veg', N='new';
+const CARTA=[
+ {id:'sartenes',name:'Sartenes de huevo',note:'con hogaza de masa madre',img:'sarten.jpg',vid:'v-sarten',items:[
+  ['Sartén de huevo + tocino','Huevos revueltos acompañados de tocino y hogaza de masa madre.',5500,[]],
+  ['Sartén de huevo + cebolla crispy','Huevos revueltos acompañados de cebolla crispy y hogaza de masa madre.',5500,[G]],
+  ['Sartén de huevo + palta','Huevos revueltos acompañados de palta y hogaza de masa madre.',5500,[G]],
+  ['Sartén de huevo + queso','Huevos revueltos acompañados de queso mantecoso y hogaza de masa madre.',5500,[G]],
+  ['Sartén de huevo + jamón','Huevos revueltos acompañados de jamón acaramelado y hogaza de masa madre.',5500,[]]]},
+ {id:'desayunos',name:'Desayunos',note:'incluyen café o té',img:'v-cheesecake.jpg',items:[
+  ['Palta y sésamo','Pan integral con palta y semillas de sésamo tostado.',3800,[G]],
+  ['Palta y huevo','Pan integral con palta y huevo revuelto.',3800,[G]],
+  ['Baguette huevo','Pan baguette con huevo revuelto.',3800,[G]],
+  ['Queso y jamón','Pan baguette con queso y jamón acaramelado.',3800,[]],
+  ['Huevo y jamón','Pan baguette con huevo revuelto y jamón acaramelado.',3800,[]],
+  ['Queso y palta','Pan baguette con queso fundido y palta.',3800,[G]],
+  ['Huevo y queso','Pan baguette con queso fundido y huevo revuelto.',3800,[G]],
+  ['Jamón y palta','Pan baguette con jamón acaramelado y palta.',3800,[]]]},
+ {id:'smoothies',name:'Smoothies y tostadas',note:'smoothies y yogurt incluyen café o té',img:'tostadas.jpg',items:[
+  ['Smoothie de cacao','Plátano, leche vegetal, mantequilla de maní y cacao, con granola casera y fruta.',5500,[V]],
+  ['Smoothie de frutos rojos','Frutos rojos, leche vegetal y mantequilla de maní, con granola casera y fruta.',5500,[V]],
+  ['Yogurt con granola y fruta','Yogurt natural, granola casera y fruta del día.',4500,[G]],
+  ['Tostadas francesas frutos rojos y Nutella','Pan remojado en huevo, leche, canela y azúcar, dorado en mantequilla, con Nutella, mermelada de frambuesa y frutos rojos.',4000,[G,N]],
+  ['Tostadas francesas plátano y maní','Pan dorado en mantequilla con mantequilla de maní, plátano, canela y salsa de chocolate.',4000,[G,N]]]},
+ {id:'sandwiches',name:'Sándwiches',note:'en baguette o ciabatta',img:'terraza.jpg',items:[
+  ['Baguette de campo','Pan baguette, queso mantecoso, jamón acaramelado, pesto, tomate cherry y lechuga.',6200,[]],
+  ['Om-Ñam vegano','Pan ciabatta, pesto, hummus, palta, semillas de sésamo y lechuga.',6200,[V]],
+  ['Palta capresse','Pan baguette, pesto, palta, tomate cherry, queso fresco, berros y reducción de aceto balsámico.',6500,[G]],
+  ['Palta huevo queso','Pan ciabatta, palta, huevo revuelto, queso mantecoso y berros.',6500,[G]],
+  ['Bocatta crespa','Pan ciabatta, queso crema, palta, tomates rebozados en aceite de oliva y berros.',6500,[G]]]},
+ {id:'ensalada',name:'Ensalada del día',note:'elige tu proteína',img:'tapa.jpg',items:[
+  ['Ensalada del día','Lechuga y berros, palta, tomate cherry, queso fresco, reducción de aceto balsámico y sésamo tostado. Proteína a elección: hummus de garbanzo, jamón acaramelado o tocino.',5500,[G]]]},
+ {id:'cafe',name:'Cafetería',note:'café de especialidad',img:'capuccino.jpg',cols:['Simple','Doble'],items:[
+  ['Espresso','La bebida más icónica del café: molienda fina y agua a alta presión.',[2000,2500],[V]],
+  ['Americano','Agua caliente con un espresso encima, para mantener la crema del café.',[2000,2500],[V]],
+  ['Cortado','La leche “corta” la intensidad del espresso y suaviza su acidez.',[2400,2700],[G]],
+  ['Capuccino','Base de espresso seguida de un lácteo emulsionado.',[2900,3200],[G]]]},
+ {id:'especiales',name:'Cafés de la casa',note:'con syrups ODK',img:'taza.jpg',items:[
+  ['Latte caramelo','Espresso simple, syrup de caramelo ODK y lácteo emulsionado.',3900,[G]],
+  ['Mocaccino','Cacao dulce, espresso doble y lácteo emulsionado.',3900,[G]],
+  ['Capuccino vainilla','Espresso doble, syrup de vainilla ODK y lácteo emulsionado.',3900,[G]],
+  ['Capuccino avellana y chocolate','Espresso doble, syrup de avellana ODK, lácteo emulsionado y cubierta de chocolate.',3900,[G]]]},
+ {id:'te',name:'Té, infusiones y chocolate',note:'David Rio, English Tea Shop y Dilmah',img:'tes.jpg',items:[
+  ['Chai latte','Té chai David Rio emulsionado con leche y canela en polvo.',4000,[G]],
+  ['Dirty chai latte','Té chai David Rio con espresso, emulsionado con leche y canela.',4700,[G]],
+  ['Matcha latte','Matcha David Rio de Kyushu, prefectura de Kagoshima. Suave y vibrante.',4500,[G]],
+  ['Matcha latte caramelo','Matcha David Rio con syrup de caramelo ODK.',4700,[G]],
+  ['Té English Tea Shop / Dilmah','Té orgánico de Sri Lanka.',1900,[V]],
+  ['Infusiones naturales','Canela y naranja · Limón, menta y jengibre · Flor de jamaica.',2000,[V,N]],
+  ['Chocolate caliente','Chocolate Bonhomia estilo europeo con cacao orgánico 100% de Perú.',4000,[G]],
+  ['Babyccino','Leche con cacao, espuma de leche, chocolate rallado y marshmallows.',3500,[]]]},
+ {id:'frio',name:'Fríos y mocktails',note:'café de especialidad, versión fría',img:'espresso-orange.jpg',items:[
+  ['Iced caramel coffee','Espresso doble, leche, hielo frappé y syrup de caramelo.',4200,[G]],
+  ['Iced latte coffee','Espresso doble, leche y hielo frappé.',4000,[G]],
+  ['Iced mocaccino coffee','Espresso doble, leche y hielo frappé.',4200,[G]],
+  ['Iced latte chai','Té chai David Rio, hielo, leche y un toque de canela.',4500,[G]],
+  ['Iced dirty chai','Té chai David Rio, hielo, leche y espresso doble.',4700,[G]],
+  ['Iced matcha latte caramelo','Matcha David Rio, hielo, leche y syrup de caramelo.',4500,[G]],
+  ['Iced dirty matcha','Matcha David Rio, hielo, leche y espresso doble.',4700,[G]],
+  ['Berriccino','Mix de berries con menta y café de especialidad, agua tónica y hielo.',4500,[V]],
+  ['Vibra Tonic','Maracuyá macerada en café de especialidad, agua tónica y hielo.',4500,[V]],
+  ['Espresso orange','Jugo de naranja, agua tónica, hielo y espresso doble.',3500,[V]],
+  ['Affogato','Espresso doble con helado de vainilla.',3000,[G]],
+  ['Café helado','Espresso doble, lácteo, helado de vainilla y crema batida.',4500,[G]]]},
+ {id:'bebidas',name:'Bebidas',note:'jugos, limonadas y más',img:'mocktails.jpg',items:[
+  ['Jugos de fruta','Consulta por los sabores disponibles.',3200,[V]],
+  ['Limonadas','Menta jengibre o tradicional.',3000,[V]],
+  ['Leches con sabor','Consulta por los sabores disponibles.',3500,[G]],
+  ['Agua mineral con y sin gas','',1500,[V]],
+  ['Bebidas','',1800,[V]],
+  ['Extra: leche sin lactosa','',800,[G]],
+  ['Extra: leche vegetal','',800,[V]]]}
+];
+/* Carta de pastelería familiar */
+const PAS_T=[
+ ['Pie de limón','Masa sablée, crema cítrica con limón natural y merengue suizo.','Diámetro 28 cm',23000,[G]],
+ ['Cheesecake de frambuesa','Base de galletas y mantequilla, relleno de queso crema y mermelada de frambuesa.','Diámetro 27 cm',25000,[G]],
+ ['Kuchen sureño','Masa quebrada con suave relleno de crema y berries.','Diámetro 28 cm',25000,[G]]];
+const PAS_V=[
+ ['Carrot cake','Bizcocho de zanahoria y naranja, crema de castañas de cajú, nueces y semillas de zapallo.','Diámetro 20 cm',28000,[V]],
+ ['Brownie de plátano','Plátano y cacao con harina de avena, cubierto de nueces.','22 × 8 cm',10000,[V]],
+ ['Queque de zanahoria','Bizcocho de zanahoria y naranja con nueces, semillas de zapallo y glaseado.','22 × 8 cm',12000,[V]],
+ ['Snicker crudivegano','Base de avena con dátiles, mantequilla de maní, manjar de dátiles, chocolate semi amargo y maní.','22 × 8 cm',12000,[V]]];
+
+const clp=n=>'$'+n.toLocaleString('es-CL');
+const leaf='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-8 6-13 15-14-1 9-6 15-14 15"/><path d="M5 19 13 11"/></svg>';
+const tags=t=>(t.includes(V)?'<span class="tag tag-vegan">'+leaf+'Vegano</span>':t.includes(G)?'<span class="tag tag-veg">Vegetariano</span>':'')+(t.includes(N)?'<span class="tag tag-new">Nuevo</span>':'');
+const isVeg=t=>t.includes(V)||t.includes(G);
+
+/* contadores (sin bebidas/extras) */
+const food=CARTA.filter(c=>c.id!=='bebidas');
+const nV=food.reduce((a,c)=>a+c.items.filter(i=>i[3].includes(V)&&c.id!=='cafe'&&c.id!=='frio'&&c.id!=='te').length,0)+PAS_V.length+3; /* + mocktails veganos */
+document.getElementById('nVegan').textContent=nV;
+const nG=['sartenes','desayunos','smoothies','sandwiches','ensalada'].reduce((a,id)=>a+CARTA.find(c=>c.id===id).items.filter(i=>isVeg(i[3])).length,0)+PAS_T.length+PAS_V.length;
+document.getElementById('nVeg').textContent=nG;
+
+/* render pastelería */
+const pasHTML=list=>list.map(p=>'<li class="item"><div class="item-name">'+p[0]+' <span class="size">'+p[2]+'</span></div><div class="price">'+clp(p[3])+'</div><p class="item-desc">'+p[1]+'</p></li>').join('');
+document.getElementById('pasTrad').innerHTML=pasHTML(PAS_T);
+document.getElementById('pasVeg').innerHTML=pasHTML(PAS_V);
+
+/* render carta */
+let cur='sartenes', fVegan=false, fVeg=false;
+const catsEl=document.getElementById('cats'), content=document.getElementById('catContent'), img=document.getElementById('catImg');
+catsEl.innerHTML=CARTA.map(c=>'<button class="cat" role="tab" data-id="'+c.id+'" aria-selected="'+(c.id===cur)+'">'+c.name+'</button>').join('');
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function render(animate){
+  const c=CARTA.find(x=>x.id===cur);
+  let items=c.items.filter(i=>fVegan?i[3].includes(V):fVeg?isVeg(i[3]):true);
+  const head='<div class="cat-title"><h3>'+c.name+'</h3>'+(c.cols?'<div class="cols"><span>'+c.cols[0]+'</span><span>'+c.cols[1]+'</span></div>':'<p>'+c.note+'</p>')+'</div>';
+  const body=items.length?'<ul class="items">'+items.map(i=>'<li class="item"><div class="item-name">'+i[0]+' '+tags(i[3])+'</div><div class="price">'+(Array.isArray(i[2])?i[2].map(clp).map(s=>'<span>'+s+'</span>').join(''):clp(i[2]))+'</div>'+(i[1]?'<p class="item-desc">'+i[1]+'</p>':'')+'</li>').join('')+'</ul>':'<p class="empty">No hay opciones '+(fVegan?'veganas':'sin carne')+' en esta categoría. Prueba con Smoothies, Sándwiches o Fríos y mocktails.</p>';
+  content.innerHTML=head+body;
+  const cv=document.getElementById('catVid');
+  if(c.vid){img.hidden=true;cv.hidden=false;cv.play&&cv.play().catch(()=>{});}
+  else{cv.hidden=true;cv.pause&&cv.pause();img.hidden=false;if(img.getAttribute('src')!=='media/'+c.img){img.style.opacity=0;setTimeout(()=>{img.src='media/'+c.img;img.onload=()=>img.style.opacity=1;},180);}}
+  catsEl.querySelectorAll('.cat').forEach(b=>b.setAttribute('aria-selected',b.dataset.id===cur));
+  if(animate&&window.gsap&&!reduce) gsap.from(content.querySelectorAll('.item'),{y:14,opacity:0,duration:.45,stagger:.04,ease:'power2.out',clearProps:'all'});
+}
+catsEl.addEventListener('click',e=>{const b=e.target.closest('.cat');if(!b)return;cur=b.dataset.id;render(true);});
+const fv=document.getElementById('f-vegan'), fg=document.getElementById('f-veg');
+fv.onclick=()=>{fVegan=!fVegan;if(fVegan)fVeg=false;fv.setAttribute('aria-pressed',fVegan);fg.setAttribute('aria-pressed',fVeg);render(true);};
+fg.onclick=()=>{fVeg=!fVeg;if(fVeg)fVegan=false;fv.setAttribute('aria-pressed',fVegan);fg.setAttribute('aria-pressed',fVeg);render(true);};
+render(false);
+
+/* tabs de cartas */
+const tabC=document.getElementById('tab-carta'), tabP=document.getElementById('tab-pas'), pC=document.getElementById('panel-carta'), pP=document.getElementById('panel-pas');
+function showCarta(p){tabC.setAttribute('aria-selected',!p);tabP.setAttribute('aria-selected',p);pC.hidden=p;pP.hidden=!p;if(window.ScrollTrigger)ScrollTrigger.refresh();}
+tabC.onclick=()=>showCarta(false); tabP.onclick=()=>showCarta(true);
+document.getElementById('goVegan').onclick=()=>{showCarta(false);cur='smoothies';fVegan=true;fVeg=false;fv.setAttribute('aria-pressed',true);fg.setAttribute('aria-pressed',false);render(true);document.getElementById('cartas').scrollIntoView({behavior:reduce?'auto':'smooth'});};
+
+/* ---------- RIBBON ---------- */
+const words=['Espresso orange','Sartén de huevo','Cheesecake de frambuesa','Matcha latte','Carrot cake vegano','Dirty chai','Tostadas francesas','Berriccino','Pie de limón','Vibra Tonic'];
+const set='<div class="ribbon-set">'+words.map(w=>'<span>'+w+'</span><i class="mk mk-flor dot"></i>').join('')+'</div>';
+const rib=document.getElementById('ribbon'); rib.innerHTML=set+set;
+
+/* ---------- GALERÍA ---------- */
+const IG='https://www.instagram.com/cafemagnolias/';
+const SLIDES=[
+ {v:'v-pour2',t:'Latte para llevar',h:'reel/Ctth2HuAqok/'},
+ {v:'v-postres',t:'Mesa de postres',h:'reel/DZf9WkZPf0c/'},
+ {i:'tostadas',t:'Tostadas francesas',h:'reel/DbD9KE7uP5f/'},
+ {i:'mocktailsbar',t:'Mocktails',h:'p/DT0hJc_jrX_/'},
+ {v:'v-cheesecake',t:'Cheesecake y latte',h:'reel/DS8OwA2j059/'},
+ {i:'tes',t:'Infusiones naturales',h:'reel/DbeKodwvBZx/'},
+ {i:'espresso-orange',t:'Espresso orange',h:''},
+ {i:'terraza',t:'La terraza',h:'reel/DJh3r_BPW6l/'},
+ {i:'pie',t:'Pie de limón',h:'p/DMx59D3AAlA/'},
+ {i:'capuccino',t:'Capuccino avellana',h:'reel/Dada-trRozb/'},
+ {i:'coldbrew',t:'Coffee party',h:'reel/DOCqDHaDDre/'},
+ {i:'regalo',t:'Cajas de regalo',h:'reel/DUtPgjREWWc/'},
+ {i:'matcha',t:'Iced matcha',h:'p/DRCzVzBjsyO/'},
+ {i:'equipo',t:'El equipo',h:'reel/DXzSiVnuX6L/'},
+ {i:'llaveros',t:'Llaveros Magnolias',h:''},
+ {i:'fachada',t:'Al atardecer',h:'reel/DS8OwA2j059/'}];
+const gal=document.getElementById('gallery');
+const play='<svg viewBox="0 0 10 10" fill="currentColor"><path d="M2 1l7 4-7 4z"/></svg>';
+gal.innerHTML=SLIDES.map(s=>'<figure class="slide"><div class="frame">'+(s.v?'<video src="media/'+s.v+'.mp4" poster="media/'+s.v+'.jpg" muted loop playsinline preload="none" aria-label="Video: '+s.t+'"></video><span class="vid-badge">'+play+'Video</span>':'<img src="media/'+s.i+'.jpg" alt="'+s.t+' en Cafetería Magnolias" loading="lazy" draggable="false">')+'</div><figcaption><b>'+s.t+'</b>'+(s.h?'<a href="'+IG+s.h+'" target="_blank" rel="noopener">Ver en IG ↗</a>':'')+'</figcaption></figure>').join('');
+const step=()=>{const s=gal.querySelector('.slide');return s?s.getBoundingClientRect().width+16:300;};
+document.getElementById('galPrev').onclick=()=>gal.scrollBy({left:-step(),behavior:'smooth'});
+document.getElementById('galNext').onclick=()=>gal.scrollBy({left:step(),behavior:'smooth'});
+const bar=document.getElementById('galBar');
+const upd=()=>{const max=gal.scrollWidth-gal.clientWidth;const p=max>0?gal.scrollLeft/max:0;const w=Math.max(.12,gal.clientWidth/gal.scrollWidth);bar.style.width=(w*100)+'%';bar.style.transform='translateX('+(p*(1/w-1)*100)+'%)';};
+gal.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
+/* arrastrar con mouse */
+let down=false,sx=0,sl=0,moved=false;
+gal.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse')return;down=true;moved=false;sx=e.clientX;sl=gal.scrollLeft;});
+window.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-sx;if(Math.abs(dx)>4){moved=true;gal.classList.add('drag');}gal.scrollLeft=sl-dx;});
+window.addEventListener('pointerup',()=>{if(!down)return;down=false;gal.classList.remove('drag');});
+gal.addEventListener('click',e=>{if(moved){e.preventDefault();moved=false;}},true);
+/* videos se reproducen solo cuando se ven */
+if('IntersectionObserver' in window){
+  const io=new IntersectionObserver(es=>es.forEach(en=>{const v=en.target;if(en.isIntersecting){v.play&&v.play().catch(()=>{});}else{v.pause&&v.pause();}}),{threshold:.4});
+  gal.querySelectorAll('video').forEach(v=>{v.preload='metadata';io.observe(v);});
+}
+/* avance automático suave */
+let auto=null;const startAuto=()=>{if(reduce)return;stopAuto();auto=setInterval(()=>{const max=gal.scrollWidth-gal.clientWidth;if(gal.scrollLeft>=max-4)gal.scrollTo({left:0,behavior:'smooth'});else gal.scrollBy({left:step(),behavior:'smooth'});},4200);};
+const stopAuto=()=>{if(auto)clearInterval(auto);auto=null;};
+['pointerenter','focusin','touchstart'].forEach(ev=>gal.addEventListener(ev,stopAuto,{passive:true}));
+gal.addEventListener('pointerleave',startAuto);
+['galPrev','galNext'].forEach(id=>document.getElementById(id).addEventListener('click',stopAuto));
+startAuto();
+
+/* ---------- INSTAGRAM GRID ---------- */
+const igPics=[['postres','reel/DZf9WkZPf0c/'],['sarten','reel/DbRuLzvxP7y/'],['mocktails','reel/DOhCOYcD8eN/'],['capuccino','reel/Dada-trRozb/'],['tapa','reel/DTwAN2hDxnn/'],['regalo','reel/DUtPgjREWWc/']];
+document.getElementById('igGrid').innerHTML=igPics.map(p=>'<a href="'+IG+p[1]+'" target="_blank" rel="noopener" aria-label="Ver publicación en Instagram"><img src="media/'+p[0]+'.jpg" alt="" loading="lazy"></a>').join('');
+document.getElementById('copyWa').onclick=function(){const b=this;const done=()=>{b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar',1800);};try{navigator.clipboard.writeText('+56953608396').then(done,()=>{selectNum();});}catch(e){selectNum();}};
+function selectNum(){const r=document.createRange();r.selectNodeContents(document.getElementById('waNum'));const s=getSelection();s.removeAllRanges();s.addRange(r);}
+
+/* ---------- HORARIO EN VIVO (hora de Chile) ---------- */
+const H={0:null,1:[7,17],2:[7,17],3:[7,20],4:[7,20],5:[7,20],6:[9,13]};
+const days=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+function nowCL(){try{const p=new Intl.DateTimeFormat('en-US',{timeZone:'America/Santiago',weekday:'short',hour:'numeric',minute:'numeric',hour12:false}).formatToParts(new Date());const g=t=>p.find(x=>x.type===t).value;return{d:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(g('weekday')),h:(+g('hour'))%24+(+g('minute'))/60};}catch(e){const n=new Date();return{d:n.getDay(),h:n.getHours()+n.getMinutes()/60};}}
+const pad=h=>String(h).padStart(2,'0')+':00';
+function status(){
+  const {d,h}=nowCL(); const el=document.getElementById('status'); const t=H[d]; let txt, open=false;
+  if(t&&h>=t[0]&&h<t[1]){open=true;txt='Abierto ahora · cierra a las '+pad(t[1]);}
+  else if(t&&h<t[0]){txt='Cerrado · abre hoy a las '+pad(t[0]);}
+  else{let k=1;while(!H[(d+k)%7])k++;const nd=(d+k)%7;txt='Cerrado · abre '+(k===1?'mañana':'el '+days[nd])+' a las '+pad(H[nd][0]);}
+  el.classList.toggle('open',open); el.querySelector('span').textContent=txt;
+  document.querySelectorAll('#hours li').forEach(li=>li.classList.toggle('today',li.dataset.d.split(',').map(Number).includes(d)));
+}
+status(); setInterval(status,60000);
+
+/* ---------- CLUB MAGNOLIAS: tarjeta digital (Supabase en vivo, demostración si no hay conexión) ---------- */
+(function(){
+const SUPA_URL='https://qspqdtxqybozrkgddezt.supabase.co', SUPA_KEY='sb_publishable_wf3VZ1-oEQcCl_V-PkBYlA_ufXD0CMA';
+const GOAL=9, DEMO_KEY='mag-club-v1', ME_KEY='mag-club-me', AUTH_KEY='mag-club-staff', PIN='1234';
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmtPhone=p=>'+56 9 '+p.slice(1,5)+' '+p.slice(5);
+const norm=v=>{const d=String(v).replace(/\D/g,'');const t=d.slice(-9);return /^9\d{8}$/.test(t)?t:null;};
+const day=ts=>new Date(ts).toDateString();
+const hhmm=ts=>{const d=new Date(ts);return (day(ts)===day(Date.now())?'Hoy':d.toLocaleDateString('es-CL',{day:'numeric',month:'short'}))+' '+d.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});};
+const lsGet=k=>{try{return JSON.parse(localStorage.getItem(k));}catch(e){return null;}};
+const lsSet=(k,v)=>{try{v==null?localStorage.removeItem(k):localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+const ERR={consent_required:'Marca la casilla para crear tu tarjeta.',invalid_name:'Escribe tu nombre.',invalid_phone:'Escribe un celular chileno de 9 dígitos que empiece con 9.',
+  already_registered:'Ese celular ya tiene tarjeta. Entra con tu celular y tu código.',not_found:'No encontramos una tarjeta con ese celular y código.',
+  too_many_attempts:'Demasiados intentos. Vuelve a probar en una hora o pide tu código en caja.',not_staff:'Esta cuenta no tiene acceso al panel.',
+  card_full_or_missing:'La tarjeta ya tiene 9 sellos: canjea el café gratis.',not_enough_stamps:'Aún no junta 9 sellos.',nothing_to_undo:'No hay sellos para deshacer.',
+  bad_login:'Correo o contraseña incorrectos.',network:'No pudimos conectar. Revisa tu internet e intenta de nuevo.'};
+const msgOf=e=>ERR[e&&e.message]||ERR.network;
+const fail=m=>{const e=new Error(m);throw e;};
+
+/* ---- Backend real: Supabase (REST, sin librerías) ---- */
+function liveApi(){
+  let auth=lsGet(AUTH_KEY);
+  async function refresh(){
+    if(!auth)return null;
+    if(auth.exp-60>Date.now()/1000)return auth.token;
+    const r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=refresh_token',{method:'POST',headers:{apikey:SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({refresh_token:auth.refresh})});
+    if(!r.ok){auth=null;lsSet(AUTH_KEY,null);return null;}
+    const j=await r.json();auth={token:j.access_token,refresh:j.refresh_token,exp:Math.floor(Date.now()/1000)+j.expires_in,email:j.user&&j.user.email};lsSet(AUTH_KEY,auth);return auth.token;
+  }
+  async function rpc(fn,args,asStaff){
+    const h={apikey:SUPA_KEY,'Content-Type':'application/json'};
+    if(asStaff){const t=await refresh();if(!t)fail('not_staff');h.Authorization='Bearer '+t;}
+    let r;try{r=await fetch(SUPA_URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:h,body:JSON.stringify(args||{})});}catch(e){fail('network');}
+    const j=await r.json().catch(()=>null);
+    if(!r.ok)fail(j&&j.message||'network');
+    return j;
+  }
+  return {live:true,
+    join:(n,p,ok)=>rpc('club_join',{p_name:n,p_phone:p,p_consent:ok}),
+    card:(p,c)=>rpc('club_card',{p_phone:p,p_code:c}),
+    staffEmail:()=>auth&&auth.email,
+    async login(email,pw){
+      let r;try{r=await fetch(SUPA_URL+'/auth/v1/token?grant_type=password',{method:'POST',headers:{apikey:SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({email,password:pw})});}catch(e){fail('network');}
+      if(!r.ok)fail('bad_login');
+      const j=await r.json();auth={token:j.access_token,refresh:j.refresh_token,exp:Math.floor(Date.now()/1000)+j.expires_in,email:j.user&&j.user.email};lsSet(AUTH_KEY,auth);
+      if(!(await rpc('staff_check',{},true))){await this.logout();fail('not_staff');}
+    },
+    async logout(){const t=auth&&auth.token;auth=null;lsSet(AUTH_KEY,null);if(t)fetch(SUPA_URL+'/auth/v1/logout',{method:'POST',headers:{apikey:SUPA_KEY,Authorization:'Bearer '+t}}).catch(()=>{});},
+    async isStaff(){if(!auth)return false;try{return !!(await rpc('staff_check',{},true));}catch(e){return false;}},
+    stats:()=>rpc('staff_stats',{},true),
+    search:q=>rpc('staff_search',{p_q:q},true),
+    addStamp:id=>rpc('staff_add_stamp',{p_client:id},true),
+    redeem:id=>rpc('staff_redeem',{p_client:id},true),
+    undo:id=>rpc('staff_undo',{p_client:id},true)};
+}
+
+/* ---- Demostración: mismos pasos, datos solo en este navegador ---- */
+function demoApi(){
+  function seed(){const t=Date.now();return{clients:{
+    '911111111':{name:'Camila (ejemplo)',phone:'911111111',code:'MAG-2741',stamps:6,rewards:1,created:t-864e6},
+    '922222222':{name:'Diego (ejemplo)',phone:'922222222',code:'MAG-5308',stamps:9,rewards:0,created:t-432e6}},
+    events:[{t:t-36e5,phone:'922222222',type:'sello'},{t:t-72e5,phone:'911111111',type:'sello'}],staff:false};}
+  let S=lsGet(DEMO_KEY);if(!S||!S.clients)S=seed();
+  const save=()=>lsSet(DEMO_KEY,S);
+  const card=p=>{const c=S.clients[p];return{name:c.name,phone:c.phone,code:c.code,stamps:c.stamps,rewards:c.rewards,
+    history:S.events.filter(e=>e.phone===p).slice(-5).reverse().map(e=>({type:e.type,at:e.t}))};};
+  const ok=v=>Promise.resolve(v);
+  return {live:false,
+    join(n,p,c){if(!c)return Promise.reject(new Error('consent_required'));if(S.clients[p])return Promise.reject(new Error('already_registered'));
+      let code;do{code='MAG-'+Math.floor(1000+Math.random()*9000);}while(Object.values(S.clients).some(x=>x.code===code));
+      S.clients[p]={name:n,phone:p,code,stamps:0,rewards:0,created:Date.now()};S.events.push({t:Date.now(),phone:p,type:'alta'});save();return ok(card(p));},
+    card(p,c){const x=S.clients[p];if(!x||x.code!==String(c).trim().toUpperCase())return Promise.reject(new Error('not_found'));return ok(card(p));},
+    staffEmail:()=>null,
+    login(_,pw){if(pw!==PIN)return Promise.reject(new Error('bad_login'));S.staff=true;save();return ok();},
+    logout(){S.staff=false;save();return ok();},
+    isStaff:()=>ok(!!S.staff),
+    stats(){return ok({clients:Object.keys(S.clients).length,stamps_today:S.events.filter(e=>e.type==='sello'&&day(e.t)===day(Date.now())).length,rewards:S.events.filter(e=>e.type==='canje').length});},
+    search(q){const qq=q.replace(/\s/g,'').toLowerCase(),d=qq.replace(/\D/g,'');
+      return ok(Object.values(S.clients).filter(c=>!qq||(d&&c.phone.includes(d))||c.code.toLowerCase().includes(qq)||c.name.toLowerCase().includes(qq)).sort((a,b)=>b.created-a.created).map(c=>({id:c.phone,name:c.name,phone:c.phone,code:c.code,stamps:c.stamps,rewards:c.rewards})));},
+    addStamp(id){const c=S.clients[id];if(c.stamps>=GOAL)return Promise.reject(new Error('card_full_or_missing'));c.stamps++;S.events.push({t:Date.now(),phone:id,type:'sello'});save();return ok(card(id));},
+    redeem(id){const c=S.clients[id];if(c.stamps<GOAL)return Promise.reject(new Error('not_enough_stamps'));c.stamps=0;c.rewards++;S.events.push({t:Date.now(),phone:id,type:'canje'});save();return ok(card(id));},
+    undo(id){const c=S.clients[id];const i=S.events.map(e=>e.phone===id&&e.type==='sello').lastIndexOf(true);if(i<0||!c.stamps)return Promise.reject(new Error('nothing_to_undo'));S.events.splice(i,1);c.stamps--;save();return ok(card(id));}};
+}
+
+/* ---- ¿Hay conexión con Supabase? (en el artifact la bloquea el navegador) ---- */
+async function pickApi(){
+  try{
+    const ctl=new AbortController();const t=setTimeout(()=>ctl.abort(),4000);
+    const r=await fetch(SUPA_URL+'/rest/v1/rpc/club_card',{method:'POST',signal:ctl.signal,headers:{apikey:SUPA_KEY,'Content-Type':'application/json'},body:JSON.stringify({p_phone:'0',p_code:'-'})});
+    clearTimeout(t);const j=await r.json().catch(()=>null);
+    if(j&&j.message==='not_found')return liveApi();
+  }catch(e){}
+  return demoApi();
+}
+
+const cli=document.getElementById('cliView'), staff=document.getElementById('staffView');
+const grid=document.getElementById('clubGrid'), paneCli=document.getElementById('paneCli'), paneStaff=document.getElementById('paneStaff'), note=document.getElementById('clubNote');
+let api, me=null, cliMode='join', staffOn=false, stats=null, list=[], sel=null, q='', toast='', lastPop=null, busy=false, poll=null, qTimer=null;
+
+function stampsHTML(n){return Array.from({length:10},(_,i)=>{const gift=i===9;const on=!gift&&i<n;const ready=gift&&n>=GOAL;return '<span class="stamp'+(gift?' gift':'')+(on?' on':'')+(ready?' ready':'')+'" data-i="'+i+'"><span class="mk mk-flor"></span></span>';}).join('');}
+function msgFor(c){if(c.stamps>=GOAL)return '¡Tienes un café gratis! Pídelo en caja.';const r=GOAL-c.stamps;return c.stamps===0?'Tu primer sello llega con tu próximo café.':'Te '+(r===1?'falta 1 sello':'faltan '+r+' sellos')+' para tu café gratis.';}
+const evName=t=>t==='sello'?'+1 sello':t==='canje'?'Café de regalo':'Inscripción';
+function setBusy(btn,on){busy=on;if(btn)btn.setAttribute('aria-busy',on?'true':'false');}
+
+function setMe(card){
+  const before=me?me.stamps:null; me=card;
+  if(card){lsSet(ME_KEY,{phone:card.phone,code:card.code});if(before!=null&&card.stamps>before)lastPop=card.stamps-1;}
+  else lsSet(ME_KEY,null);
+}
+async function refreshMe(){
+  const s=lsGet(ME_KEY);if(!s||document.hidden)return;
+  try{const c=await api.card(s.phone,s.code);const changed=!me||c.stamps!==me.stamps||c.rewards!==me.rewards;setMe(c);if(changed)renderCli();}
+  catch(e){if(e.message==='not_found'){setMe(null);cliMode='login';renderCli();}}
+}
+
+function renderCli(){
+  if(me){
+    const h=(me.history||[]).slice(0,4);
+    cli.innerHTML='<div><p class="ptitle">Hola, '+esc(me.name.split(' ')[0])+'</p><p class="psub">Tu tarjeta Club Magnolias</p></div>'+
+    '<div class="card"><div class="card-top"><span class="mk mk-word" aria-hidden="true"></span><small>Club<br>Magnolias</small></div><div class="stamps">'+stampsHTML(me.stamps)+'</div><div class="card-foot"><span class="card-name">'+esc(me.name)+'</span><b>'+Math.min(me.stamps,GOAL)+' / '+GOAL+'</b></div></div>'+
+    '<p class="cmsg">'+msgFor(me)+'</p>'+
+    '<div class="code"><span>Muestra este código en caja</span><b>'+esc(me.code)+'</b><span>Guárdalo: lo necesitas para volver a entrar</span></div>'+
+    (h.length?'<ul class="hist">'+h.map(e=>'<li><b>'+evName(e.type)+'</b><span>'+hhmm(e.at)+'</span></li>').join('')+'</ul>':'')+
+    (me.rewards?'<p class="psub">Cafés de regalo disfrutados: '+me.rewards+'</p>':'')+
+    '<button class="linkbtn" id="cliOut">Cerrar sesión</button>';
+    document.getElementById('cliOut').onclick=()=>{setMe(null);cliMode='login';renderCli();};
+    if(lastPop!=null&&window.gsap&&!reduce){const st=cli.querySelector('.stamp[data-i="'+lastPop+'"] .mk');if(st)gsap.fromTo(st,{scale:2,rotate:-30,opacity:0},{scale:1,rotate:0,opacity:1,duration:.6,ease:'back.out(2.2)'});}
+    lastPop=null; return;
+  }
+  if(cliMode==='join'){
+    cli.innerHTML='<div><p class="ptitle">Únete al Club Magnolias</p><p class="psub">Crea tu tarjeta digital y empieza a juntar sellos.</p></div>'+
+    '<form class="f" id="fJoin" novalidate><label>Tu nombre<input id="jName" autocomplete="given-name" placeholder="Ej: Francisca" maxlength="40"></label>'+
+    '<label>Tu celular<input id="jPhone" inputmode="tel" autocomplete="tel" placeholder="+56 9 1234 5678"></label>'+
+    '<label class="check"><input type="checkbox" id="jOk"> Acepto que Magnolias guarde mi nombre y celular solo para el club.</label>'+
+    '<p class="err" id="jErr" aria-live="polite"></p><button class="btn btn-primary" type="submit">Crear mi tarjeta</button></form>'+
+    '<button class="linkbtn" id="toLogin">Ya tengo tarjeta</button>';
+    document.getElementById('toLogin').onclick=()=>{cliMode='login';renderCli();};
+    document.getElementById('fJoin').onsubmit=async e=>{e.preventDefault();if(busy)return;
+      const n=document.getElementById('jName').value.trim(), p=norm(document.getElementById('jPhone').value), err=document.getElementById('jErr');
+      if(n.length<2){err.textContent=ERR.invalid_name;return;}
+      if(!p){err.textContent=ERR.invalid_phone;return;}
+      if(!document.getElementById('jOk').checked){err.textContent=ERR.consent_required;return;}
+      const b=e.submitter;setBusy(b,true);
+      try{setMe(await api.join(n,p,true));renderAll();}catch(x){err.textContent=msgOf(x);if(x.message==='already_registered'){cliMode='login';setTimeout(()=>{renderCli();const lp=document.getElementById('lPhone');if(lp)lp.value=fmtPhone(p);},1600);}}
+      finally{setBusy(b,false);}};
+  } else {
+    cli.innerHTML='<div><p class="ptitle">Entra a tu tarjeta</p><p class="psub">Usa el celular con que te inscribiste y tu código MAG.</p></div>'+
+    '<form class="f" id="fLogin" novalidate><label>Tu celular<input id="lPhone" inputmode="tel" autocomplete="tel" placeholder="+56 9 1234 5678"></label>'+
+    '<label>Tu código<input id="lCode" autocapitalize="characters" autocomplete="off" placeholder="MAG-XXXXX" maxlength="9"></label>'+
+    '<p class="err" id="lErr" aria-live="polite"></p><button class="btn btn-primary" type="submit">Ver mi tarjeta</button></form>'+
+    '<p class="psub">'+(api.live?'¿Olvidaste tu código? Pídelo en caja: el equipo lo ve en su panel.':'Para probar, usa 9 1111 1111 y el código MAG-2741 (Camila, ejemplo).')+'</p>'+
+    '<button class="linkbtn" id="toJoin">Crear una tarjeta nueva</button>';
+    document.getElementById('toJoin').onclick=()=>{cliMode='join';renderCli();};
+    document.getElementById('fLogin').onsubmit=async e=>{e.preventDefault();if(busy)return;
+      const p=norm(document.getElementById('lPhone').value), c=document.getElementById('lCode').value.trim().toUpperCase(), err=document.getElementById('lErr');
+      if(!p){err.textContent=ERR.invalid_phone;return;}
+      if(!/^MAG-[A-Z0-9]{4,5}$/.test(c)){err.textContent='Escribe tu código tal como aparece, por ejemplo MAG-7K2QP.';return;}
+      const b=e.submitter;setBusy(b,true);
+      try{setMe(await api.card(p,c));renderAll();}catch(x){err.textContent=msgOf(x);}finally{setBusy(b,false);}};
+  }
+}
+
+async function loadStaff(){
+  try{const [s,l]=await Promise.all([api.stats(),api.search(q)]);stats=s;list=l||[];}
+  catch(e){if(e.message==='not_staff'){staffOn=false;}toast=msgOf(e);}
+  renderStaff();
+}
+function renderStaff(){
+  if(!staffOn){
+    staff.innerHTML='<div><p class="ptitle">Acceso del equipo</p><p class="psub">Solo el personal de Magnolias entra a este panel.</p></div>'+
+    '<form class="f" id="fPin" novalidate style="max-width:340px">'+(api.live?'<label>Correo<input id="sEmail" type="email" autocomplete="username" placeholder="correo del local"></label>':'')+
+    '<label>'+(api.live?'Contraseña':'Clave del local')+'<input id="pin" type="password" autocomplete="current-password" '+(api.live?'':'inputmode="numeric" maxlength="6" ')+'placeholder="••••"></label><p class="err" id="pErr" aria-live="polite">'+esc(toast)+'</p><button class="btn btn-primary" type="submit">Entrar</button></form>'+
+    (api.live?'':'<p class="psub">Clave de la demostración: 1234</p>');
+    toast='';
+    document.getElementById('fPin').onsubmit=async e=>{e.preventDefault();if(busy)return;const b=e.submitter;setBusy(b,true);
+      try{await api.login(api.live?document.getElementById('sEmail').value.trim().toLowerCase():'',document.getElementById('pin').value);staffOn=true;await loadStaff();}
+      catch(x){document.getElementById('pErr').textContent=msgOf(x);}finally{setBusy(b,false);}};
+    return;
+  }
+  const c=sel&&list.find(x=>x.id===sel);
+  staff.innerHTML='<div class="detail-head"><p class="ptitle">Panel de caja</p><button class="linkbtn" id="sOut">Salir</button></div>'+
+  '<div class="stats"><div class="stat"><b>'+(stats?stats.clients:'–')+'</b><span>clientes inscritos</span></div><div class="stat"><b>'+(stats?stats.stamps_today:'–')+'</b><span>sellos hoy</span></div><div class="stat"><b>'+(stats?stats.rewards:'–')+'</b><span>cafés regalados</span></div></div>'+
+  '<div class="f"><label>Buscar por celular, código o nombre<input id="sq" value="'+esc(q)+'" placeholder="Ej: 9 1111 1111 o MAG-2741"></label></div>'+
+  '<ul class="clist">'+(list.length?list.map(x=>'<li><button data-id="'+esc(x.id)+'" aria-pressed="'+(x.id===sel)+'"><span><b>'+esc(x.name)+'</b><small>'+esc(x.code)+' · '+fmtPhone(x.phone)+'</small></span><span class="mini">'+Array.from({length:GOAL},(_,i)=>'<i class="'+(i<x.stamps?'on':'')+'"></i>').join('')+'</span></button></li>').join(''):'<li class="psub">Sin resultados. Pídele al cliente que se inscriba desde la web.</li>')+'</ul>'+
+  (c?'<div class="detail"><div class="detail-head"><b>'+esc(c.name)+'</b><span class="psub">'+esc(c.code)+'</span></div>'+
+    '<div class="bar"><i style="width:'+(Math.min(c.stamps,GOAL)/GOAL*100)+'%"></i></div>'+
+    '<p class="psub">'+Math.min(c.stamps,GOAL)+' de '+GOAL+' sellos'+(c.stamps>=GOAL?' · <b style="color:var(--accent-ink)">tiene un café gratis</b>':'')+'</p>'+
+    '<div class="actions"><button class="btn btn-primary" id="aStamp"'+(c.stamps>=GOAL?' disabled':'')+'>+1 sello</button><button class="btn btn-rose" id="aRedeem"'+(c.stamps>=GOAL?'':' disabled')+'>Canjear café gratis</button><button class="btn btn-ghost" id="aUndo">Deshacer último sello</button></div>'+
+    '<p class="toast" aria-live="polite">'+esc(toast)+'</p></div>':'<p class="psub">Elige un cliente de la lista para sumar sellos.</p>'+(toast?'<p class="toast" aria-live="polite">'+esc(toast)+'</p>':''));
+  toast='';
+  document.getElementById('sOut').onclick=async()=>{await api.logout();staffOn=false;sel=null;list=[];stats=null;renderStaff();};
+  const sq=document.getElementById('sq');
+  sq.oninput=()=>{q=sq.value;clearTimeout(qTimer);qTimer=setTimeout(async()=>{try{list=await api.search(q)||[];}catch(e){toast=msgOf(e);}const pos=sq.selectionStart;renderStaff();const n=document.getElementById('sq');n.focus();n.setSelectionRange(pos,pos);},api.live?280:0);};
+  staff.querySelectorAll('.clist button').forEach(b=>b.onclick=()=>{sel=b.dataset.id;renderStaff();});
+  if(c){
+    const act=(id,fn,okMsg)=>{const b=document.getElementById(id);b.onclick=async()=>{if(busy)return;setBusy(b,true);
+      try{const card=await fn(c.id);Object.assign(c,{stamps:card.stamps,rewards:card.rewards});toast=okMsg(card);
+        if(!api.live&&me&&me.phone===card.phone){setMe(card);renderCli();}
+        stats=await api.stats();}
+      catch(x){toast=msgOf(x);}finally{setBusy(b,false);renderStaff();}};};
+    act('aStamp',api.addStamp,()=>'Sello agregado a '+c.name+'.');
+    act('aRedeem',api.redeem,()=>'Café de regalo canjeado. La tarjeta vuelve a cero.');
+    act('aUndo',api.undo,()=>'Último sello eliminado.');
+  }
+}
+function renderAll(){renderCli();renderStaff();}
+
+/* Diseño según el modo: en vivo, los clientes ven solo su tarjeta; el panel vive en #caja */
+function layout(){
+  if(!api.live){grid.className='club-demo';paneCli.hidden=false;paneStaff.hidden=false;return;}
+  const caja=location.hash==='#caja';
+  paneCli.hidden=caja; paneStaff.hidden=!caja;
+  grid.className='club-demo '+(caja?'solo-staff':'solo');
+  if(caja){const sec=document.getElementById('club');if(sec)sec.scrollIntoView();}
+}
+
+(async function init(){
+  cli.innerHTML='<p class="psub">Cargando tu tarjeta…</p>';
+  api=await pickApi();
+  if(api.live&&note){note.innerHTML='<span><b>Tu tarjeta queda guardada.</b> Inscríbete aquí, guarda tu código MAG y muéstralo en caja cada vez que pidas un café, té o mocktail. Tus sellos aparecen en tu celular al instante.</span>';}
+  const s=lsGet(ME_KEY);
+  if(s){try{me=await api.card(s.phone,s.code);}catch(e){if(e.message==='not_found')lsSet(ME_KEY,null);cliMode='login';}}
+  staffOn=await api.isStaff();
+  layout(); window.addEventListener('hashchange',layout);
+  renderCli();
+  if(staffOn)await loadStaff();else renderStaff();
+  if(api.live){poll=setInterval(()=>{if(me)refreshMe();},15000);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&me)refreshMe();});}
+  else window.addEventListener('storage',e=>{if(e.key===DEMO_KEY){api=demoApi();if(me)refreshMe();if(staffOn)loadStaff();}});
+})();
+})();
+
+/* ---------- MAPA: centrar Magnolias en pantallas angostas ---------- */
+const ms=document.querySelector('.mapscroll');
+function centerMap(){if(!ms)return;const sv=ms.querySelector('svg');const k=sv.getBoundingClientRect().width/972;ms.scrollLeft=Math.max(0,512*k-ms.clientWidth/2);}
+centerMap();window.addEventListener('resize',centerMap);
+
+/* ---------- MODO OSCURO / CLARO ---------- */
+const root=document.documentElement, mbtn=document.getElementById('modeBtn');
+function setMode(m){if(m==='light')root.setAttribute('data-mode','light');else root.removeAttribute('data-mode');mbtn.setAttribute('aria-label',m==='light'?'Cambiar a modo oscuro':'Cambiar a modo claro');try{localStorage.setItem('magnolias-modo',m);}catch(e){}}
+let saved='dark';try{saved=localStorage.getItem('magnolias-modo')||'dark';}catch(e){}
+setMode(saved);
+mbtn.onclick=()=>setMode(root.getAttribute('data-mode')==='light'?'dark':'light');
+
+/* ---------- MENÚ MÓVIL + HEADER ---------- */
+const nav=document.getElementById('nav'), mb=document.getElementById('menuBtn');
+mb.onclick=()=>{const o=nav.classList.toggle('open');mb.setAttribute('aria-expanded',o);};
+nav.addEventListener('click',e=>{if(e.target.tagName==='A'){nav.classList.remove('open');mb.setAttribute('aria-expanded',false);}});
+const top=document.getElementById('top');
+window.addEventListener('scroll',()=>top.classList.toggle('scrolled',scrollY>10),{passive:true});
+
+/* ---------- ANIMACIONES GSAP ---------- */
+if(window.gsap){
+  gsap.registerPlugin(ScrollTrigger);
+  const mm=gsap.matchMedia();
+  mm.add('(prefers-reduced-motion: no-preference)',()=>{
+    const tl=gsap.timeline({defaults:{ease:'power3.out'}});
+    tl.from('.hero .h-a',{y:28,opacity:0,duration:.8,stagger:.09})
+      .from('#heroArch',{clipPath:'inset(100% 0 0 0 round 999px 999px 22px 22px)',duration:1.1,ease:'power4.inOut'},0)
+      .from('.hero-media .ring',{scale:.92,opacity:0,duration:1},.3)
+      .from('.hero-badge',{x:-20,opacity:0,duration:.6},.8);
+    gsap.to('.hero-flor',{yPercent:30,rotate:8,ease:'none',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+    /* cinta infinita */
+    const setW=rib.firstElementChild.offsetWidth;
+    gsap.to(rib,{x:-setW,duration:38,ease:'none',repeat:-1});
+    /* encabezados de sección: suben suavemente, siempre visibles */
+    gsap.utils.toArray('.sec-head, .panel, .quote, .promo, .card').forEach(el=>{
+      gsap.from(el,{y:36,duration:.9,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 92%',toggleActions:'play none none none'}});
+    });
+    gsap.utils.toArray('.visit-photo .arch img, .pas-photos img').forEach(im=>{
+      gsap.fromTo(im,{scale:1.12},{scale:1,ease:'none',scrollTrigger:{trigger:im,start:'top bottom',end:'bottom top',scrub:true}});
+    });
+    gsap.from('.panel .mk-flor',{rotate:-20,scale:.8,ease:'none',scrollTrigger:{trigger:'#jardin',start:'top bottom',end:'bottom top',scrub:true}});
+  });
+}
+})();
+</script>
