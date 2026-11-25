@@ -7,3 +7,7 @@ Sitio web de Cafetería Magnolias (Casablanca, Chile). Es un sitio estático: `i
 - **Publicar:** Cloudflare (Workers & Pages) conectado a este repositorio, sin comando de build y con la raíz del repositorio como carpeta de salida.
 
 Sitio creado por fluva.
+
+## App en el teléfono
+`manifest.webmanifest`, `sw.js` e `icons/` permiten agregar la tarjeta a la pantalla de inicio (abre directo en `#club`).
+Si cambias imágenes o íconos con el mismo nombre, sube la versión de `CACHE` en `sw.js` para que los teléfonos descarguen la nueva.

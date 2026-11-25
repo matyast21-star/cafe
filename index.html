@@ -1,4 +1,16 @@
+<!doctype html>
+<html lang="es">
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#15221A">
+<meta name="color-scheme" content="dark light">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon-64.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Magnolias">
 <title>Cafetería Magnolias</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Cafetería de especialidad en Casablanca, Chile. Cocina tradicional, vegetariana y vegana. Pet friendly.">
@@ -378,7 +390,7 @@ p{margin:0}
 .ig img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
 .ig a:hover img{transform:scale(1.06)}
 .soc-cards{display:grid;gap:14px;align-content:start}
-.soc{display:grid;grid-template-columns:48px 1fr auto;gap:14px;align-items:center;padding:18px;border-radius:var(--r);background:var(--band-2);text-decoration:none;color:var(--band-text);border:1px solid rgba(245,238,223,.12)}
+.soc{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:14px;align-items:center;padding:18px;border-radius:var(--r);background:var(--band-2);text-decoration:none;color:var(--band-text);border:1px solid rgba(245,238,223,.12)}
 .soc:hover{border-color:var(--accent)}
 .soc .ico{width:48px;height:48px;border-radius:14px;background:rgba(245,238,223,.08);display:grid;place-items:center}
 .soc .ico svg{width:24px;height:24px}
@@ -388,7 +400,7 @@ p{margin:0}
 .copy-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;font-size:.9rem;color:var(--band-soft)}
 .copy-row code{font-family:var(--f-title);font-size:1.05rem;letter-spacing:.06em;color:var(--band-text);user-select:all}
 .copy-row button{font:inherit;font-size:.82rem;color:var(--band-text);background:none;border:1px solid rgba(245,238,223,.3);border-radius:999px;padding:.35em .9em;cursor:pointer}
-@media(max-width:860px){.soc-grid{grid-template-columns:1fr}}
+@media(max-width:860px){.soc-grid{grid-template-columns:minmax(0,1fr)}}
 
 /* footer */
 .foot{background:var(--band-2);color:var(--band-soft);padding-block:56px 40px;--logo:var(--marfil)}
@@ -524,6 +536,38 @@ html.cov-open{overflow:hidden}
 .scan p{margin:0;color:rgba(245,238,223,.8);font-size:.92rem}
 .staff-tools{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
 .staff-tools .f{flex:1 1 220px}
+
+.install{display:grid;grid-template-columns:auto minmax(0,1fr);gap:12px 14px;align-items:center;padding:16px;border-radius:20px;border:1px solid rgba(233,207,135,.4);background:linear-gradient(160deg,rgba(212,175,90,.12),rgba(212,175,90,.02))}
+.install[hidden]{display:none}
+.install-ic img{display:block;border-radius:14px;box-shadow:0 6px 18px -6px rgba(0,0,0,.6)}
+.install b{display:block;font-family:var(--f-title);text-transform:uppercase;letter-spacing:.08em;font-weight:500;color:var(--gold-ink)}
+.install span{font-size:.88rem;color:var(--soft);line-height:1.35}
+.install .btn{grid-column:1/-1;justify-content:center}
+
+/* ---------- Ajustes para celular ---------- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{-webkit-tap-highlight-color:rgba(212,175,90,.18)}
+@media(max-width:760px){
+  .hero .wrap>*{min-width:0}
+  .hero h1{font-size:clamp(2.05rem,9.6vw,2.7rem);overflow-wrap:break-word}
+  .nav a{min-height:44px;display:inline-flex;align-items:center;padding-inline:.7em}
+  .btn{min-height:48px}
+  .linkbtn{padding:.55em 0;min-height:40px}
+  .f .check{align-items:center}
+  .f .check input{width:22px;height:22px;flex:none;margin:0;accent-color:var(--accent)}
+  .f input{font-size:16px}
+  .carta-foot a,.slide figcaption a,.slide a{display:inline-flex;align-items:center;min-height:40px}
+  .foot nav{gap:2px 10px}
+  .foot nav a{display:inline-flex;align-items:center;min-height:44px;padding-inline:.4em}
+  .stamp.gift::after{font-size:.62rem}
+  .soc{padding:14px;gap:12px}.soc b{overflow-wrap:anywhere}
+  .cov-in{padding-inline:max(16px,env(safe-area-inset-left)) max(16px,env(safe-area-inset-right));padding-bottom:max(56px,env(safe-area-inset-bottom))}
+  .cov-x{width:52px;height:52px}
+  .qr-box svg{width:196px;height:196px}
+  .tag,.vid-badge{font-size:.76rem}
+}
+@media(max-width:480px){.nav{justify-content:space-between}.nav a{font-size:.74rem;letter-spacing:.05em;padding-inline:.38em}}
+@media(max-width:360px){.nav a{font-size:.68rem;letter-spacing:.02em;padding-inline:.25em}.cov-head .mk-word{width:210px}.code b,.cov .code b{font-size:1.9rem}.stats.s4 .stat b{font-size:1.5rem}}
 </style>
 
 <header class="top" id="top">
@@ -921,6 +965,11 @@ html.cov-open{overflow:hidden}
       <p class="cov-sub">9 sellos y el 10º café va por la casa. Cada compra, un raspe y gane.</p>
     </div>
     <div class="cov-slot" id="covSlot"></div>
+    <div class="install" id="installBox" hidden>
+      <span class="install-ic" aria-hidden="true"><img src="icons/icon-192.png" alt="" width="52" height="52"></span>
+      <div><b>Lleva tu tarjeta en el teléfono</b><span id="installTxt">Agrégala a tu pantalla de inicio y ábrela con un toque, como una app.</span></div>
+      <button class="btn btn-gold" id="installBtn" type="button">Agregar a inicio</button>
+    </div>
   </div>
 </div>
 
@@ -1546,6 +1595,27 @@ function layout(){
   if(api.live){setInterval(()=>{if(me)refreshMe();},15000);document.addEventListener('visibilitychange',()=>{if(!document.hidden&&me)refreshMe();});}
   else window.addEventListener('storage',e=>{if(e.key===DEMO_KEY){api=demoApi();if(me)refreshMe();if(staffOn)loadStaff();}});
 })();
+})();
+
+
+/* ---------- APP EN LA PANTALLA DE INICIO ---------- */
+(function(){
+  const box=document.getElementById('installBox'), btn=document.getElementById('installBtn'), txt=document.getElementById('installTxt');
+  const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  const mobile=window.matchMedia('(pointer:coarse)').matches;
+  let deferred=null;
+  if('serviceWorker' in navigator&&location.protocol==='https:'&&!/claude\.ai|claudeusercontent/.test(location.hostname)){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+  if(standalone)return;
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;box.hidden=false;});
+  window.addEventListener('appinstalled',()=>{box.hidden=true;});
+  if(ios||mobile)box.hidden=false;
+  btn.onclick=async()=>{
+    if(deferred){deferred.prompt();const r=await deferred.userChoice.catch(()=>null);deferred=null;if(r&&r.outcome==='accepted')box.hidden=true;return;}
+    if(ios)txt.innerHTML='En Safari toca <b style="display:inline;font-family:inherit;text-transform:none;letter-spacing:0">Compartir</b> (el cuadro con la flecha hacia arriba) y luego <b style="display:inline;font-family:inherit;text-transform:none;letter-spacing:0">Agregar a inicio</b>.';
+    else txt.innerHTML='Abre el menú del navegador (los tres puntos) y elige <b style="display:inline;font-family:inherit;text-transform:none;letter-spacing:0">Agregar a la pantalla principal</b> o <b style="display:inline;font-family:inherit;text-transform:none;letter-spacing:0">Instalar app</b>.';
+    if(window.gsap&&!reduce)gsap.fromTo(txt,{opacity:0,y:6},{opacity:1,y:0,duration:.4});
+  };
 })();
 
 /* ---------- MAPA: centrar Magnolias en pantallas angostas ---------- */
